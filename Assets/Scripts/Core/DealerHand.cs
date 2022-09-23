@@ -4,10 +4,11 @@ using System.Collections;
 
 public class DealerHand : BlackJackHand {
 
-	public Sprite cardBack;
+	public Sprite cardBack;//sprite for card back
 
-	bool reveal;
+	bool reveal;//reveal or don't reveal
 
+	//similar to player hand, but only show the card back
 	protected override void SetupHand(){
 		base.SetupHand();
 
@@ -19,6 +20,8 @@ public class DealerHand : BlackJackHand {
 		reveal = false;
 	}
 		
+	//if dealer has two cards and is not revealing, show the value of one card,
+	//otherwise, reveal both cards value
 	protected override void ShowValue(){
 
 		if(hand.Count > 1){
@@ -33,6 +36,7 @@ public class DealerHand : BlackJackHand {
 
 				BlackJackManager manager = GameObject.Find("Game Manager").GetComponent<BlackJackManager>();
 
+				//?? probable bug, the dealer busts over 21, but will continue hitting if under 17
 				if(handVals > 21){
 					manager.DealerBusted();
 				} else if(!DealStay(handVals)){
