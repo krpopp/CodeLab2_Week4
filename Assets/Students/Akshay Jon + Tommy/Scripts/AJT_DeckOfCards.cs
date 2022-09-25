@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class AJT_DeckOfCards : DeckOfCards
 {
-	 new public class Card{
+	new public static ShuffleBag<Card> deck;
+
+	new public class Card{
 		
 		//enums to hold a suite
 		public enum Suit {
@@ -93,4 +95,14 @@ public class AJT_DeckOfCards : DeckOfCards
 		}
 	}
 
+    protected override void AddCardsToDeck()
+    {
+		for (int i = 0; i < 4; i++) {
+			foreach (Card.Suit suit in Card.Suit.GetValues(typeof(Card.Suit))){
+				foreach (Card.Type type in Card.Type.GetValues(typeof(Card.Type))){
+					deck.Add(new Card(type, suit));
+				}
+			}
+		}
+    }
 }
