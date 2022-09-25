@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AJT_BlackJackManager : BlackJackManager
 {
+    //BUG FIX
+    //references to access inactive game objects
 	[SerializeField] GameObject hitButton, stayButton;
 
 
@@ -14,6 +16,8 @@ public class AJT_BlackJackManager : BlackJackManager
 		foreach(DeckOfCards.Card handCard in hand){
 			handValue += handCard.GetCardHighValue();
 		}
+        //BUG FIX
+        //Checks the total and in case of it being over 21 it gives the Ace low value
 		if (handValue > 21) {
 		 	foreach(DeckOfCards.Card handCard in hand) {
 		 		if (handCard.GetCardHighValue() == 11) handValue -= 10;
@@ -23,12 +27,16 @@ public class AJT_BlackJackManager : BlackJackManager
 		return handValue;
 	}
 
+    //BUG FIX
+    //instead of reloading the scene on Try Again it resets the scene
+    //resets scene to preserve deck contents
 	public void ResetScene() {
 		GameObject.Find("Player Hand Value").GetComponent<AJT_BlackJackHand>().ResetHand();
 		GameObject.Find("Dealer Hand Value").GetComponent<AJT_DealerHand>().ResetHand();
 		ShowPlayerButtons();
 	}
 
+    //Function to reset buttons in the scene
 	public void ShowPlayerButtons()
 	{
 		hitButton.SetActive(true);
