@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class AJT_BlackJackHand : BlackJackHand
 {
+    protected override void ShowValue()
+    {
+        base.ShowValue();
 
-    
+        //calls the blackjack function from BlackJackManager anytime the player gets a Black Jack
+        if(handVals == 21 && hand.Count == 2)
+        {
+            GameObject.Find("Game Manager").GetComponent<BlackJackManager>().BlackJack();
+        }
+        
+    }
+
 
 }
