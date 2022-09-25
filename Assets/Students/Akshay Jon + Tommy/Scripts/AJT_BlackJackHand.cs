@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class AJT_BlackJackHand : BlackJackHand
 {
+    	
+	public void ResetHand() {
+        foreach (Transform child in transform) Destroy(child.gameObject);
+        SetupHand();
+	}
+
     protected override void ShowValue()
     {
         base.ShowValue();

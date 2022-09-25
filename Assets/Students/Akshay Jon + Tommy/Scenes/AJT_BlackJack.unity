@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -837,8 +837,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1462814554}
-        m_TargetAssemblyTypeName: BlackJackManager, Assembly-CSharp
-        m_MethodName: TryAgain
+        m_TargetAssemblyTypeName: AJT_BlackJackManager, Assembly-CSharp
+        m_MethodName: ResetScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -933,6 +933,8 @@ MonoBehaviour:
   statusText: {fileID: 195439677}
   tryAgain: {fileID: 1450806461}
   loadScene: AJT_BlackJack
+  hitButton: {fileID: 873982211}
+  stayButton: {fileID: 925610031}
 --- !u!1 &1677990535
 GameObject:
   m_ObjectHideFlags: 0
