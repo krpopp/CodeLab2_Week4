@@ -55,6 +55,7 @@ public class DeckOfCards : MonoBehaviour {
 		public int GetCardHighValue(){
 			int val; //declares new int variable. 
 
+
 			//switch break
 			switch(cardNum){
 			case Type.A: //if card number Type type is assigned value of A
