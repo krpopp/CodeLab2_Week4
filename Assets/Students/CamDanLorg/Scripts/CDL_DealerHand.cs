@@ -5,7 +5,7 @@ using UnityEngine;
 public class CDL_DealerHand : DealerHand
 {
     
-    //Bug 3: If the dealer has higher card value than the player, the dealer still hits. 
+    //Bug 3: If the dealer has higher card value than the player, the dealer still hits.  
     protected override bool DealStay(int handVal)
     {
         BlackJackHand playerHand = GameObject.Find("Player Hand Value").GetComponent<BlackJackHand>();
