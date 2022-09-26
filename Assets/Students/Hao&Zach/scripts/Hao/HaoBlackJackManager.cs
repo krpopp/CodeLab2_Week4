@@ -32,4 +32,12 @@ public class HaoBlackJackManager : BlackJackManager
 
         return handValue;
     }
+
+    public void TryAgainWithoutReloadingScene()
+    {
+
+    }
+
+
+
 }

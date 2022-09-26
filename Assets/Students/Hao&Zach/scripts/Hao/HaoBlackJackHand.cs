@@ -10,8 +10,7 @@ public class HaoBlackJackHand : BlackJackHand
 
         if( handVals==21 && hand.Count == 2)//natural black jack
         {
-            GameObject.Find("Game Manager").GetComponent<BlackJackManager>().PlayerWin();
-            GameObject.Find("Game Manager").GetComponent<BlackJackManager>().HidePlayerButtons();
+            GameObject.Find("Game Manager").GetComponent<BlackJackManager>().BlackJack();
         }
 
     }
