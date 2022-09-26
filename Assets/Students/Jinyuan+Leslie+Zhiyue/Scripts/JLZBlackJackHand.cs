@@ -23,8 +23,7 @@ public class JLZBlackJackHand : BlackJackHand {
 		if (handVals == 21)
 		{
 			BlackJackManager manager = GameObject.Find("Game Manager").GetComponent<BlackJackManager>();
-			manager.HidePlayerButtons();
-			manager.PlayerWin();
+			manager.BlackJack();
 
         }
 	}
