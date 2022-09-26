@@ -557,7 +557,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1749950760}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: BlackJackHand, Assembly-CSharp
         m_MethodName: HitMe
         m_Mode: 1
         m_Arguments:
@@ -1103,7 +1103,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1749950756}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 003dc7d1aa43642929505cf449fa1fe4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ee384f7b82bc864088c5285d5175dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   total: {fileID: 1749950758}
