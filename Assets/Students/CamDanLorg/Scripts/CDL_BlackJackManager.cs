@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class CDL_BlackJackManager : BlackJackManager
 {
+    //Bug 4: When Dealer Busts, Hit me button does not hide.
+    //Bug 4: HidePlayerButton not being called in Dealerbust, PlayerWin, PlayerLose.
 
-    /*public override int GetHandValue(List<DeckOfCards.Card> hand)
+    /*public new void DealerBusted()
     {
-        int handValue = 0;
-        
-        
+        HidePlayerButtons();
+        GameOverText("DEALER BUSTS!", Color.green); //displays game over tex.t
     }*/
 }
