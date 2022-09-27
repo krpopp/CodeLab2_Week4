@@ -16,6 +16,9 @@ public class NMBlackJackHand : BlackJackHand
             GameObject.Find("Game Manager").GetComponent<BlackJackManager>().PlayerBusted();
             dealerHand.RevealCardWhenPlayerBust();
         }
+        else if (handVals == 21)
+        {
+            GameObject.Find("Game Manager").GetComponent<BlackJackManager>().BlackJack();
+        }
     }
-        
 }

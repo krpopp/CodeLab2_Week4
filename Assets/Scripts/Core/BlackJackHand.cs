@@ -63,9 +63,14 @@ public class BlackJackHand : MonoBehaviour {
 		{
 			GameObject.Find("Game Manager").GetComponent<BlackJackManager>().PlayerBusted();
 		}
+		else if (handVals == 21)
+		{
+			GameObject.Find("Game Manager").GetComponent<BlackJackManager>().BlackJack();
+		}
 	}
 
-	public int GetHandValue(){
+	public int GetHandValue()
+	{
 		BlackJackManager manager = GameObject.Find("Game Manager").GetComponent<BlackJackManager>();
 
 		return manager.GetHandValue(hand);
