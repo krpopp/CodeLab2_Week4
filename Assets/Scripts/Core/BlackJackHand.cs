@@ -59,7 +59,8 @@ public class BlackJackHand : MonoBehaviour {
 			
 		total.text = "Player: " + handVals;
 
-		if(handVals > 21){
+		if(handVals > 21)
+		{
 			GameObject.Find("Game Manager").GetComponent<BlackJackManager>().PlayerBusted();
 		}
 	}

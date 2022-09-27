@@ -50,11 +50,13 @@ public class DealerHand : BlackJackHand {
 		}
 	}
 
-	protected virtual bool DealStay(int handVal){
+	protected virtual bool DealStay(int handVal)
+	{
 		return handVal > 17;
 	}
 
-	public void RevealCard(){
+	public void RevealCard()
+	{
 		reveal = true;
 
 		GameObject cardOne = transform.GetChild(0).gameObject;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
  * 1, dealer only show hands when player bust - dealer should show hands whenever players loses (lose or bust)
@@ -13,5 +14,18 @@ using UnityEngine;
 
 public class NMDealerHand : DealerHand
 {
-    
+	//Bug1: called when player bust
+    public void RevealCardWhenPlayerBust()
+	{
+		GameObject cardOne = transform.GetChild(0).gameObject;
+
+		cardOne.GetComponentsInChildren<Image>()[0].sprite = null;
+		cardOne.GetComponentsInChildren<Image>()[1].enabled = true;
+		
+		ShowCard(hand[0], cardOne, 0);
+		
+		handVals = GetHandValue();
+
+		total.text = "Dealer: " + handVals;
+	}
 }
