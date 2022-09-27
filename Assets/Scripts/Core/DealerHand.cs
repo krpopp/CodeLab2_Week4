@@ -8,7 +8,8 @@ public class DealerHand : BlackJackHand {
 
 	bool reveal;
 
-	protected override void SetupHand(){
+	protected override void SetupHand()
+	{
 		base.SetupHand();
 
 		GameObject cardOne = transform.GetChild(0).gameObject;
@@ -19,30 +20,43 @@ public class DealerHand : BlackJackHand {
 		reveal = false;
 	}
 		
-	protected override void ShowValue(){
+	protected override void ShowValue()
+	{
 
-		if(hand.Count > 1){
-			if(!reveal){
+		if(hand.Count > 1)
+		{
+			if(!reveal)
+			{
 				handVals = hand[1].GetCardHighValue();
 
 				total.text = "Dealer: " + handVals + " + ???";
-			} else {
+			} 
+			else 
+			{
 				handVals = GetHandValue();
 
 				total.text = "Dealer: " + handVals;
 
 				BlackJackManager manager = GameObject.Find("Game Manager").GetComponent<BlackJackManager>();
 
-				if(handVals > 21){
+				if(handVals > 21)
+				{
 					manager.DealerBusted();
-				} else if(!DealStay(handVals)){
+				} 
+				else if(!DealStay(handVals))
+				{
 					Invoke("HitMe", 1);
-				} else {
+				} 
+				else 
+				{
 					BlackJackHand playerHand = GameObject.Find("Player Hand Value").GetComponent<BlackJackHand>();
-
-					if(handVals < playerHand.handVals){
+					
+					if(handVals < playerHand.handVals)
+					{
 						manager.PlayerWin();
-					} else {
+					} 
+					else 
+					{
 						manager.PlayerLose();
 					}
 				}
