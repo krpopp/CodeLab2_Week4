@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311915, g: 0.3807396, b: 0.35872662, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -295,6 +295,7 @@ GameObject:
   - component: {fileID: 789124628}
   - component: {fileID: 789124627}
   - component: {fileID: 789124629}
+  - component: {fileID: 789124630}
   m_Layer: 5
   m_Name: Deck
   m_TagString: Untagged
@@ -367,7 +368,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789124625}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 100be527fb9bc4754a0cae82c9e43662, type: 3}
   m_Name: 
@@ -379,6 +380,21 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c9b902eaf32a648c5972df9b2a36a3b2, type: 3}
   - {fileID: 21300000, guid: 8e8f141c5c7a84579a4e4a67ce867027, type: 3}
   - {fileID: 21300000, guid: d12be2cea5e9d496fa93831e834227be, type: 3}
+--- !u!114 &789124630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789124625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e78bcc26f277bd4b922acded887bfbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardNumUI: {fileID: 0}
+  cardImageUI: {fileID: 0}
+  cardSuits: []
 --- !u!1 &790905167
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,8 +572,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1749950760}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1749950761}
+        m_TargetAssemblyTypeName: BlackJackHand, Assembly-CSharp
         m_MethodName: HitMe
         m_Mode: 1
         m_Arguments:
@@ -690,9 +706,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1462814552}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: HidePlayerButtons
+      - m_Target: {fileID: 1831423599}
+        m_TargetAssemblyTypeName: CDL_DealerHand, Assembly-CSharp
+        m_MethodName: CDL_RevealCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -702,8 +718,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1831423598}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1831423599}
+        m_TargetAssemblyTypeName: DealerHand, Assembly-CSharp
         m_MethodName: RevealCard
         m_Mode: 1
         m_Arguments:
@@ -836,8 +852,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1462814552}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1462814554}
+        m_TargetAssemblyTypeName: BlackJackManager, Assembly-CSharp
         m_MethodName: TryAgain
         m_Mode: 1
         m_Arguments:
@@ -895,7 +911,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1462814553}
-  - component: {fileID: 1462814552}
+  - component: {fileID: 1462814554}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -903,21 +919,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1462814552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1462814551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc1d786f9e6464cd796a169b1a30b7ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statusText: {fileID: 195439677}
-  tryAgain: {fileID: 1450806461}
-  loadScene: BlackJack
 --- !u!4 &1462814553
 Transform:
   m_ObjectHideFlags: 0
@@ -933,6 +934,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1462814554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462814551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84265f59635b24442897036b61533987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusText: {fileID: 195439677}
+  tryAgain: {fileID: 1450806461}
+  loadScene: BlackJack 1
 --- !u!1 &1677990535
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,6 +1041,7 @@ GameObject:
   - component: {fileID: 1749950759}
   - component: {fileID: 1749950758}
   - component: {fileID: 1749950760}
+  - component: {fileID: 1749950761}
   m_Layer: 5
   m_Name: Player Hand Value
   m_TagString: Untagged
@@ -1101,13 +1118,30 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1749950756}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 003dc7d1aa43642929505cf449fa1fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   total: {fileID: 1749950758}
   xOffset: -110
+  yOffset: -50
+  handBase: {fileID: 1749950756}
+  handVals: 0
+--- !u!114 &1749950761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749950756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae15444c14a9df242b6818125cb18fcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  total: {fileID: 1749950758}
+  xOffset: -200
   yOffset: -50
   handBase: {fileID: 1749950756}
   handVals: 0
@@ -1122,7 +1156,7 @@ GameObject:
   - component: {fileID: 1831423595}
   - component: {fileID: 1831423597}
   - component: {fileID: 1831423596}
-  - component: {fileID: 1831423598}
+  - component: {fileID: 1831423599}
   m_Layer: 5
   m_Name: Dealer Hand Value
   m_TagString: Untagged
@@ -1192,7 +1226,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1831423594}
   m_CullTransparentMesh: 1
---- !u!114 &1831423598
+--- !u!114 &1831423599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1201,7 +1235,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1831423594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcfd9cbf5fa5c457cafb4ec778361306, type: 3}
+  m_Script: {fileID: 11500000, guid: 299219fe05233aa4d806d8f5baf120a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   total: {fileID: 1831423596}
