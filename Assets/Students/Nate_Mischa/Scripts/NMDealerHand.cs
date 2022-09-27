@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /*
  * 1, dealer only show hands when player bust - dealer should show hands whenever players loses (lose or bust)
  * 2, when player hit 21, 'BlackJack' is not called - 'BlackJack' should be called when player hit 21
- * 3, ???
+ * 3, ??? - ui bug(?), drawing more than 5 cards will result in the fifth being cut out
  * 4, when dealer hit 21, 'BlackJack' is not called - 'BlackJack' should be called when dealer hit 21
  * 5, Ace only has one value 11 - Ace should alternate between 1 and 11
  * 6, no natural blackjack - there should be natural blackjack win or lose
