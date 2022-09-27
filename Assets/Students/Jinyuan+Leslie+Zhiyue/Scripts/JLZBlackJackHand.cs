@@ -5,12 +5,6 @@ using System.Collections.Generic;
 
 public class JLZBlackJackHand : BlackJackHand {
 
-	bool stay = false;
-
-	void Start () {
-		SetupHand();
-	}
-
 	protected override void SetupHand(){
 		// get DeckOfCards
 		deck = GameObject.Find("Deck").GetComponent<DeckOfCards>();
@@ -20,6 +14,7 @@ public class JLZBlackJackHand : BlackJackHand {
 		HitMe();
 
 		//player wins if the hand cards equal to 21
+		// BUG FIX: BlackJack when player starts with 21
 		if (handVals == 21)
 		{
 			BlackJackManager manager = GameObject.Find("Game Manager").GetComponent<BlackJackManager>();

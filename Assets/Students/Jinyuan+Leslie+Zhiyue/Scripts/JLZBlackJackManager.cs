@@ -14,17 +14,26 @@ public class JLZBlackJackManager : BlackJackManager
 			handValue += handCard.GetCardHighValue();
 		}
 
-        // BUG FIX (Ace): Ace can either be 1 or 11, whichever is more advantagous to the player
-		if (handValue > 21)
+		// BUG FIX (Ace): Ace can either be 1 or 11, whichever is more advantagous to the player
+		int i = 0;
+		while (handValue > 21 && i < hand.Count)
 		{
-            foreach (DeckOfCards.Card handCard in hand)
-            {
-                if(handCard.GetCardHighValue() == 11)
-				{
-					handValue -= 10;
-				}
-            }
-        }
+			if (hand[i].GetCardHighValue() == 11)
+			{
+				handValue -= 10;
+			}
+			i++;
+		}
+		//if (handValue > 21)
+		//{
+           // foreach (DeckOfCards.Card handCard in hand)
+            //{
+                //if(handCard.GetCardHighValue() == 11)
+				//{
+					//handValue -= 10;
+				//}
+           // }
+        //}
         return handValue;
 	}
 }
