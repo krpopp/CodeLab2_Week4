@@ -21,5 +21,17 @@ public class JLZDeckOfCards : DeckOfCards{
 		}
 		
 	}
-	
+
+
+	// Bug Fixed: Remove a card each time drawing a card
+    public override Card DrawCard()
+    {
+		Card nextCard = deck.Next();
+
+		deck.Remove(nextCard);
+
+		Debug.Log("Cards in Deck: " + deck.Count);
+
+		return nextCard;
+	}
 }
