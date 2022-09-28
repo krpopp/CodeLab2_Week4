@@ -22,8 +22,14 @@ public class JLZDeckOfCards : DeckOfCards{
 		
 	}
 
+	// BUG FIX: reshuffle deck when it has less than 20 cards
+    protected override bool IsValidDeck()
+    {
+        return deck != null && deck.Count >= 20;
+    }
 
-	// Bug Fixed: Remove a card each time drawing a card
+
+    // Bug Fixed: Remove a card each time drawing a card
     public override Card DrawCard()
     {
 		Card nextCard = deck.Next();
