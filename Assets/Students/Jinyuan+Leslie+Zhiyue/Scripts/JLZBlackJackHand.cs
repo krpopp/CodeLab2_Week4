@@ -34,11 +34,5 @@ public class JLZBlackJackHand : BlackJackHand {
 		if(handVals > 21){
 			GameObject.Find("Game Manager").GetComponent<BlackJackManager>().PlayerBusted();
 		}
-
-		// BUG FIX: Blackjack immediately when player hits 21
-		if (handVals == 21)
-		{
-            GameObject.Find("Game Manager").GetComponent<BlackJackManager>().BlackJack();
-        }
 	}
 }
