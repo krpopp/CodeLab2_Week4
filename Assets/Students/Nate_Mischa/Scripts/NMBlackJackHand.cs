@@ -1,9 +1,8 @@
 using UnityEngine;
 
-
-
 public class NMBlackJackHand : BlackJackHand
 {
+    
     public NMDealerHand dealerHand;
     protected override void ShowValue()
     {
@@ -23,4 +22,15 @@ public class NMBlackJackHand : BlackJackHand
             GameObject.Find("Game Manager").GetComponent<BlackJackManager>().BlackJack();
         }
     }
+    
+    public void ReSetUpHand()
+    {
+        for (int i = 0; i < hand.Count; i++)
+        {
+            Destroy(handBase.transform.GetChild(i).gameObject);
+        }
+        hand.Clear();
+        SetupHand();
+    }
+    
 }

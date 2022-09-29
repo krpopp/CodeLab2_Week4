@@ -6,10 +6,12 @@ using UnityEngine.UI;
 /*
  * 1, dealer only show hands when player bust - dealer should show hands whenever players loses (lose or bust)
  * 2, when player hit 21, 'BlackJack' is not called - 'BlackJack' should be called when player hit 21
- * 3, ??? - ui bug(?), drawing more than 5 cards will result in the fifth being cut out
+ * 3, the starting deck only have 52 cards and constantly reshuffle when player tries Again
+ *		- starting deck made up of 4 decks and only reshuffles after deck count reaches 20
  * 4, when dealer hit 21, 'BlackJack' is not called - 'BlackJack' should be called when dealer hit 21
  * 5, Ace only has one value 11 - Ace should alternate between 1 and 11
  * 6, no natural blackjack - there should be natural blackjack win or lose
+ * 7, ui bug(?), drawing more than 5 cards will result in the fifth being cut out
  */
 
 public class NMDealerHand : DealerHand
@@ -40,5 +42,15 @@ public class NMDealerHand : DealerHand
 		{
 			GameObject.Find("Game Manager").GetComponent<BlackJackManager>().BlackJack();
 		}
+	}
+	
+	public void ReSetUpHand()
+	{
+		for (int i = 0; i < hand.Count; i++)
+		{
+			Destroy(handBase.transform.GetChild(i).gameObject);
+		}
+		hand.Clear();
+		SetupHand();
 	}
 }
