@@ -379,6 +379,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c9b902eaf32a648c5972df9b2a36a3b2, type: 3}
   - {fileID: 21300000, guid: 8e8f141c5c7a84579a4e4a67ce867027, type: 3}
   - {fileID: 21300000, guid: d12be2cea5e9d496fa93831e834227be, type: 3}
+  dealerHand: {fileID: 1831423594}
+  playerHand: {fileID: 1749950756}
+  deckCount: 0
 --- !u!1 &790905167
 GameObject:
   m_ObjectHideFlags: 0
