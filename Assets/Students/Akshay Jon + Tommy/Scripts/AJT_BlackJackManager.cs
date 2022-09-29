@@ -25,6 +25,7 @@ public class AJT_BlackJackManager : BlackJackManager
 		 		if (handValue <= 21) break;
 		 	}
 		}
+		//Automatically stays when player reaches 21
 		return handValue;
 	}
 
@@ -46,4 +47,26 @@ public class AJT_BlackJackManager : BlackJackManager
 		statusText.text = "";
 	}
 
+	//Functions rewrote to access inactive objects
+	//Couldn't override bc they aren't static, created new functions
+	new public void HidePlayerButtons() {
+		hitButton.SetActive(false);
+		stayButton.SetActive(false);
+	}
+
+	new public void BlackJack(){
+		GameOverText("Black Jack!", Color.green);
+		HidePlayerButtons();
+	}
+
+	new public void PlayerBusted(){
+		HidePlayerButtons();
+		GameOverText("YOU BUST", Color.red);
+	}
+
+	//Wrapped multiple button calls into one function that can be used to auto pass
+	public void PlayerStays() {
+		HidePlayerButtons();
+		GameObject.Find("Dealer Hand Value").GetComponent<AJT_DealerHand>().RevealDealer();
+	}
 }

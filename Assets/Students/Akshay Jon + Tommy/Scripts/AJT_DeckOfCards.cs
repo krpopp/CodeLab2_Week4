@@ -9,18 +9,38 @@ public class AJT_DeckOfCards : DeckOfCards
 	AJT_DealerHand dealerHand;
 	AJT_BlackJackHand playerHand;
 
-	//initialize a shuffled deck of cards, removing duplicates of cards in hands
-	protected override void AddCardsToDeck()
+    private void Start()
     {
 		//Get refs to hands
 		dealerHand = dealerHandGO.GetComponent<AJT_DealerHand>();
 		playerHand = playerHandGO.GetComponent<AJT_BlackJackHand>();
 
-		//Create a new list of cards to skip from the player and dealer's hands
-		List<Card> cardsToSkip = new List<Card>(dealerHand.Hand.Count + playerHand.Hand.Count);
-		cardsToSkip.AddRange(dealerHand.Hand);
-		cardsToSkip.AddRange(playerHand.Hand);
+		AddCardsToDeck();
+    }
 
+    //initialize a shuffled deck of cards, removing duplicates of cards in hands
+    protected override void AddCardsToDeck()
+    {
+
+		//clear the shufflebag
+		deck = new ShuffleBag<Card>();
+
+		//Create a new list of cards to skip from the player and dealer's hands
+		List<Card> cardsToSkip = new List<Card>();
+		if (dealerHand && playerHand) {
+			if (dealerHand.Hand != null && playerHand.Hand != null) {
+			Debug.Log(dealerHand.Hand);
+			for (int i = 0; i < dealerHand.Hand.Count; i++) {
+				Debug.Log(dealerHand.Hand[i]);
+			}
+			if (dealerHand.Hand.Count > 0 || dealerHand.Hand.Count > 0) {
+				cardsToSkip = new List<Card>(dealerHand.Hand.Count + playerHand.Hand.Count);
+		
+				cardsToSkip.AddRange(dealerHand.Hand);
+				cardsToSkip.AddRange(playerHand.Hand);
+			}
+			}
+		}
 		//loop 4 times through the 52 combinations of card number and suit
 		for (int i = 0; i < 4; i++) {
 			foreach (Card.Suit suit in Card.Suit.GetValues(typeof(Card.Suit))){
