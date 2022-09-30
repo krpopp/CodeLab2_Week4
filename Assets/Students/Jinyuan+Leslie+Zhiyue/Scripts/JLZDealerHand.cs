@@ -4,8 +4,6 @@ using System.Collections;
 
 public class JLZDealerHand : DealerHand{
 
-	public Sprite cardBack;
-
 	bool reveal;
 
 	// hide the image and text of the card
@@ -55,22 +53,4 @@ public class JLZDealerHand : DealerHand{
 		}
 	}
 
-	// check if the value is larger than 17
-	protected virtual bool DealStay(int handVal){
-		return handVal > 17;
-	}
-
-	// reveal the hidden card info of dealer
-	public void RevealCard(){
-		reveal = true;
-
-		GameObject cardOne = transform.GetChild(0).gameObject;
-
-		cardOne.GetComponentsInChildren<Image>()[0].sprite = null;
-		cardOne.GetComponentsInChildren<Image>()[1].enabled = true;
-
-		ShowCard(hand[0], cardOne, 0);
-
-		ShowValue();
-	}
 }
