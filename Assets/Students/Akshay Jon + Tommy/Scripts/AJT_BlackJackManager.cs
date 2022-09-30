@@ -64,7 +64,7 @@ public class AJT_BlackJackManager : BlackJackManager
 		GameOverText("YOU BUST", Color.red);
 	}
 
-	//Wrapped multiple button calls into one function that can be used to auto pass
+	//Wrapped multiple button calls into one function that can also be used to auto pass
 	public void PlayerStays() {
 		HidePlayerButtons();
 		GameObject.Find("Dealer Hand Value").GetComponent<AJT_DealerHand>().RevealDealer();

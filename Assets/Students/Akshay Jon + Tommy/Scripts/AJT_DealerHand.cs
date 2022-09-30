@@ -13,15 +13,20 @@ public class AJT_DealerHand : DealerHand
 
     protected override void SetupHand(){
 		Reveal = false;
-		base.SetupHand();
 
-		//hide first card
-		GameObject cardOne = transform.GetChild(0).gameObject;
-		Debug.Log(cardOne.name);
-		cardOne.GetComponentInChildren<Text>().text = "";
-		cardOne.GetComponentsInChildren<Image>()[0].sprite = cardBack;
-		cardOne.GetComponentsInChildren<Image>()[1].enabled = false;
-	}
+		deck = GameObject.Find("Deck").GetComponent<DeckOfCards>();
+		hand = new List<DeckOfCards.Card>();
+		//Add two cards to player hand
+		HitMe();
+		HitMe();
+
+        //hide first card
+        GameObject cardOne = transform.GetChild(0).gameObject;
+        Debug.Log(cardOne.name);
+        cardOne.GetComponentInChildren<Text>().text = "";
+        cardOne.GetComponentsInChildren<Image>()[0].sprite = cardBack;
+        cardOne.GetComponentsInChildren<Image>()[1].enabled = false;
+    }
 
     //BUG FIX
     //removes the remaining cards from the previous round and sets up new hands
