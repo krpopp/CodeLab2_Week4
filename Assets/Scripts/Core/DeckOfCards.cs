@@ -9,6 +9,8 @@ public class DeckOfCards : MonoBehaviour {
 	public Image cardImageUI;
 	public Sprite[] cardSuits;
 
+	//card class
+	//contains the card's suit and score
 	public class Card{
 
 		public enum Suit {
@@ -47,6 +49,8 @@ public class DeckOfCards : MonoBehaviour {
 			return "The " + cardNum + " of " + suit;
 		}
 
+		//find the score of the card
+		//BUG: aces shouldn't always be 11
 		public int GetCardHighValue(){
 			int val;
 
@@ -70,9 +74,12 @@ public class DeckOfCards : MonoBehaviour {
 
 	public static ShuffleBag<Card> deck;
 
+	//BUG: Deck recreates itself every round
+	//BUG: Deck doesn't reshuffle
 	// Use this for initialization
 	void Awake () {
 
+		//if there isn't a deck, make one
 		if(!IsValidDeck()){
 			deck = new ShuffleBag<Card>();
 
@@ -86,6 +93,7 @@ public class DeckOfCards : MonoBehaviour {
 		return deck != null; 
 	}
 
+	//add cards to deck lol
 	protected virtual void AddCardsToDeck(){
 		foreach (Card.Suit suit in Card.Suit.GetValues(typeof(Card.Suit))){
 			foreach (Card.Type type in Card.Type.GetValues(typeof(Card.Type))){
@@ -98,13 +106,14 @@ public class DeckOfCards : MonoBehaviour {
 	void Update () {
 	}
 
+	//pull the top card in the deck
 	public virtual Card DrawCard(){
 		Card nextCard = deck.Next();
 
 		return nextCard;
 	}
 
-
+	//get the card's score and make it a string
 	public string GetNumberString(Card card){
 		if(card.cardNum.GetHashCode() <= 10){
 			return card.cardNum.GetHashCode() + "";
@@ -112,7 +121,8 @@ public class DeckOfCards : MonoBehaviour {
 			return card.cardNum + "";
 		}
 	}
-		
+
+	//get the card's suit, for UI stuff
 	public Sprite GetSuitSprite(Card card){
 		return cardSuits[card.suit.GetHashCode()];
 	}

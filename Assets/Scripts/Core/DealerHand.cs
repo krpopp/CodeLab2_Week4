@@ -8,6 +8,7 @@ public class DealerHand : BlackJackHand {
 
 	bool reveal;
 
+	//Make the dealer's hand, flip over the first card
 	protected override void SetupHand(){
 		base.SetupHand();
 
@@ -18,7 +19,9 @@ public class DealerHand : BlackJackHand {
 
 		reveal = false;
 	}
-		
+
+	//determine dealer's score based on which cards have been revealed
+	//determine if the dealer has busted, should hit, or should stay (and who wins)
 	protected override void ShowValue(){
 
 		if(hand.Count > 1){
@@ -50,10 +53,13 @@ public class DealerHand : BlackJackHand {
 		}
 	}
 
+	//determines when the dealer should stay
+    //BUG: dealer shouldn't always hit over 17
 	protected virtual bool DealStay(int handVal){
 		return handVal > 17;
 	}
 
+	//flip over the dealer's first card
 	public void RevealCard(){
 		reveal = true;
 

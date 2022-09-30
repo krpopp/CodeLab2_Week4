@@ -10,7 +10,8 @@ public class BlackJackManager : MonoBehaviour {
 	public GameObject tryAgain;
 	public string loadScene;
 
-	public void PlayerBusted(){
+    #region game states for UI stuff
+    public void PlayerBusted(){
 		HidePlayerButtons();
 		GameOverText("YOU BUST", Color.red);
 	}
@@ -33,22 +34,24 @@ public class BlackJackManager : MonoBehaviour {
 		HidePlayerButtons();
 	}
 
-	public void GameOverText(string str, Color color){
+    public void GameOverText(string str, Color color){
 		statusText.text = str;
 		statusText.color = color;
 
 		tryAgain.SetActive(true);
 	}
 
-	public void HidePlayerButtons(){
+    public void HidePlayerButtons(){
 		GameObject.Find("HitButton").SetActive(false);
 		GameObject.Find("StayButton").SetActive(false);
 	}
+    #endregion
 
-	public void TryAgain(){
+    public void TryAgain(){
 		SceneManager.LoadScene(loadScene);
 	}
 
+	//Find the score of the given hand
 	public virtual int GetHandValue(List<DeckOfCards.Card> hand){
 		int handValue = 0;
 

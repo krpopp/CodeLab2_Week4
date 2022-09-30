@@ -19,13 +19,16 @@ public class BlackJackHand : MonoBehaviour {
 		SetupHand();
 	}
 
+	//BUG: no natural black jacks
+	//Make the player's hand and add two cards
 	protected virtual void SetupHand(){
 		deck = GameObject.Find("Deck").GetComponent<DeckOfCards>();
 		hand = new List<DeckOfCards.Card>();
 		HitMe();
 		HitMe();
 	}
-	
+
+	//Create a new card and add it to the player's hand
 	public void HitMe(){
 		if(!stay){
 			DeckOfCards.Card card = deck.DrawCard();
@@ -40,6 +43,7 @@ public class BlackJackHand : MonoBehaviour {
 		}
 	}
 
+	//Arranging the card in the canvas
 	protected void ShowCard(DeckOfCards.Card card, GameObject cardObj, int pos){
 		cardObj.name = card.ToString();
 
@@ -54,6 +58,7 @@ public class BlackJackHand : MonoBehaviour {
 		cardObj.GetComponentsInChildren<Image>()[1].sprite = deck.GetSuitSprite(card);
 	}
 
+	//Display the player's score, determine if the player has busted
 	protected virtual void ShowValue(){
 		handVals = GetHandValue();
 			
@@ -64,6 +69,7 @@ public class BlackJackHand : MonoBehaviour {
 		}
 	}
 
+	//Find the player's score
 	public int GetHandValue(){
 		BlackJackManager manager = GameObject.Find("Game Manager").GetComponent<BlackJackManager>();
 
