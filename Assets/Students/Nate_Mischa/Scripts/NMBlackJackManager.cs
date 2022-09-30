@@ -14,7 +14,7 @@ public class NMBlackJackManager : BlackJackManager
 
     private void Start()
     {
-        deck = GameObject.Find("Deck").GetComponent<NMDeckOfCards>();
+        deck = GameObject.Find("Deck").GetComponent<NMDeckOfCards>(); //get deck
     }
 
     public override int GetHandValue(List<DeckOfCards.Card> hand)
@@ -22,44 +22,45 @@ public class NMBlackJackManager : BlackJackManager
         int handValue = 0;
         bool weHaveAnAce = false;
 
-        foreach(DeckOfCards.Card handCard in hand){
-            handValue += handCard.GetCardHighValue();
-            if (handCard.cardNum == DeckOfCards.Card.Type.A)
+        foreach(DeckOfCards.Card handCard in hand)
+        {
+            handValue += handCard.GetCardHighValue(); //check hand values
+            if (handCard.cardNum == DeckOfCards.Card.Type.A) //if card of type a is in hand
             {
-                weHaveAnAce = true;
+                weHaveAnAce = true; //record ace
             }
         }
 
-        if (weHaveAnAce)
+        if (weHaveAnAce) //if ace is in hand
         {
-            if (handValue - 11 <= 10)
+            if (handValue - 11 <= 10) //if hand minus 11 is less than or equal to 10, ace value defaults to 11
             {
 
             }
-            else
+            else //so set to
             {
-                handValue -= 11;
-                handValue += 1;
+                handValue -= 11; //1
+                handValue += 1; //11
             }
         }
         //Debug.Log("new get hand value");
-        return handValue;
+        return handValue; //update hand value
     }
 
     //Bug4: shuffle only 20 cards left
     public void NewTryAgain()
     {
-        if (deck.GetDeckCount() <= 200)
+        if (deck.GetDeckCount() <= 20) //if deck count is less than 20
         {
-            SceneManager.LoadScene(loadScene);
+            SceneManager.LoadScene(loadScene); //reload scene
         }
         else
         {
             //clear all cards from scene
             //store cards removed from play
             //update the deck to exclude removed cards
-            nMDealerHand.ReSetUpHand();
-            nMBlackJackHand.ReSetUpHand();
+            nMDealerHand.ReSetUpHand(); //reset dealer hand
+            nMBlackJackHand.ReSetUpHand(); //reset player hand
         }
     }
 }
