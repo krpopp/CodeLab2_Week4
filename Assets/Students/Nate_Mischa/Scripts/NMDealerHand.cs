@@ -22,16 +22,16 @@ public class NMDealerHand : DealerHand
 	//Called when player bust, show dealer's hand and update text
 	public void RevealCardWhenPlayerBust()
 	{
-		GameObject cardOne = transform.GetChild(0).gameObject;
+		GameObject cardOne = transform.GetChild(0).gameObject; //check face down card
 
-		cardOne.GetComponentsInChildren<Image>()[0].sprite = null;
-		cardOne.GetComponentsInChildren<Image>()[1].enabled = true;
+		cardOne.GetComponentsInChildren<Image>()[0].sprite = null; //card sprite disabled
+		cardOne.GetComponentsInChildren<Image>()[1].enabled = true; //show card sprite
 		
-		ShowCard(hand[0], cardOne, 0);
+		ShowCard(hand[0], cardOne, 0); //show card value
 		
-		handVals = GetHandValue();
+		handVals = GetHandValue(); //dealer hand value
 
-		total.text = "Dealer: " + handVals;
+		total.text = "Dealer: " + handVals; //dealer hand vale text display
 	}
 	
 	protected override void ShowValue()
@@ -40,17 +40,17 @@ public class NMDealerHand : DealerHand
 		//Bug4&6: When dealer draws or natural BlackJack, call BlackJack
 		if (handVals == 21)
 		{
-			GameObject.Find("Game Manager").GetComponent<BlackJackManager>().BlackJack();
+			GameObject.Find("Game Manager").GetComponent<BlackJackManager>().BlackJack(); //call GM
 		}
 	}
 	
 	public void ReSetUpHand()
 	{
-		for (int i = 0; i < hand.Count; i++)
+		for (int i = 0; i < hand.Count; i++) //check all card obj in hand
 		{
-			Destroy(handBase.transform.GetChild(i).gameObject);
+			Destroy(handBase.transform.GetChild(i).gameObject); //destroy card instance
 		}
-		hand.Clear();
-		SetupHand();
+		hand.Clear(); //clear hand
+		SetupHand(); //reset hand
 	}
 }
