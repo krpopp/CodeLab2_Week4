@@ -9,7 +9,8 @@ public class DeckOfCards : MonoBehaviour {
 	public Image cardImageUI;
 	public Sprite[] cardSuits;
 
-	public class Card{
+	[System.Serializable]
+	public class Card {
 		
 		//enums to hold a suite
 		public enum Suit {

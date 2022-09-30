@@ -31,9 +31,9 @@ public class AJT_BlackJackManager : BlackJackManager
     //instead of reloading the scene on Try Again it resets the scene
     //resets scene to preserve deck contents
 	public void ResetScene() {
+		ShowPlayerButtons();
 		GameObject.Find("Player Hand Value").GetComponent<AJT_BlackJackHand>().ResetHand();
 		GameObject.Find("Dealer Hand Value").GetComponent<AJT_DealerHand>().ResetHand();
-		ShowPlayerButtons();
 	}
 
     //Function to reset buttons in the scene
@@ -45,4 +45,26 @@ public class AJT_BlackJackManager : BlackJackManager
 		statusText.text = "";
 	}
 
+	//Functions rewrote to access inactive objects
+    //Couldn't override bc they aren't static, created new functions
+    new public void HidePlayerButtons() {
+        hitButton.SetActive(false);
+        stayButton.SetActive(false);
+    }
+
+    new public void BlackJack(){
+        GameOverText("Black Jack!", Color.green);
+        HidePlayerButtons();
+    }
+
+    new public void PlayerBusted(){
+        HidePlayerButtons();
+        GameOverText("YOU BUST", Color.red);
+    }
+
+    //Wrapped multiple button calls into one function that can be used to auto stay
+    public void PlayerStays() {
+        HidePlayerButtons();
+        GameObject.Find("Dealer Hand Value").GetComponent<AJT_DealerHand>().RevealDealer();
+    }
 }
