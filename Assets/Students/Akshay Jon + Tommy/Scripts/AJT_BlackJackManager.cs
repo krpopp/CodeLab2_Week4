@@ -13,11 +13,12 @@ public class AJT_BlackJackManager : BlackJackManager
 	public override int GetHandValue(List<DeckOfCards.Card> hand){
 		int handValue = 0;
 
+		//Get highest possible total of hand
 		foreach(DeckOfCards.Card handCard in hand){
 			handValue += handCard.GetCardHighValue();
 		}
         //BUG FIX
-        //Checks the total and in case of it being over 21 it gives the Ace low value
+        //Checks if the total is over 21 and incrementally change ace values
 		if (handValue > 21) {
 		 	foreach(DeckOfCards.Card handCard in hand) {
 		 		if (handCard.GetCardHighValue() == 11) handValue -= 10;
