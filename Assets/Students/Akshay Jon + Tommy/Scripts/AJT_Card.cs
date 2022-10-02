@@ -10,31 +10,32 @@ public class AJT_Card : DeckOfCards.Card {
     }
 
 	public Enhanced enhanced;
-
+	/*
 	public AJT_Card(Type cardNum, Suit suit){		//constructor to declare a variable of type Card
 			this.cardNum = cardNum;
 			this.suit = suit;
 	}
+	*/
 
 	public override string ToString(){				//overrides the ToString function
-		return "The " + num + " of " + suit;
+		return "The " + cardNum + " of " + suit;
 	}
 
 	//BUG; write GetCardLowValue
 	public virtual int GetCardValue(){					//Checks the face value on the card and in case of A,J,K or Q it assigns it a value
 		int val;									//in case of it being a number it defaults to the number on it	
-		switch(num) {
+		switch(cardNum) {
 			//BUG; ace should be 11 or 1
-			case Num.A:
+			case Type.A:
 				val = 11;
 				break;
-			case Num.K:
-			case Num.Q:
-			case Num.J:
+			case Type.K:
+			case Type.Q:
+			case Type.J:
 				val = 10;
 				break;	
 			default:
-				val = (int)num;
+				val = (int)cardNum;
 				break;
 		}
 		
