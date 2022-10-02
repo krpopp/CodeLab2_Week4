@@ -18,13 +18,31 @@ public class AJT_DealerHand : DealerHand
 	public void ResetHand() {
 		//This loop gave us so much trouble.
 		//We weren't grabbing all the children, and w/o DestroyImmediate the code doesn't execute in time for other calls
-        for (int i = transform.childCount - 1; i >= 0; i--) {
-            DestroyImmediate(transform.GetChild(i).gameObject);
+        for (int i = handBase.transform.childCount - 1; i >= 0; i--) {
+            DestroyImmediate(handBase.transform.GetChild(i).gameObject);
         }
 
-		Reveal = false;
 		SetupHand();
     }
+
+	protected override void SetupHand(){
+		//this bool must be false before base.SetupHand to stop dealer from calling HitMe on the first frame of the next round
+		Reveal = false;
+
+		//Set references
+		deck = GameObject.Find("Deck").GetComponent<DeckOfCards>();
+		hand = new List<DeckOfCards.Card>();
+		//Add two cards to player hand
+		HitMe();
+		HitMe();
+
+		//hide first card, get child from handBase instead of own transform
+		GameObject cardOne = handBase.transform.GetChild(0).gameObject;
+		cardOne.GetComponentInChildren<Text>().text = "";
+		cardOne.GetComponentsInChildren<Image>()[0].sprite = cardBack;
+		cardOne.GetComponentsInChildren<Image>()[1].enabled = false;
+		//default value for hidden card
+	}
 
 
 	//Overriden to access new private bool reveal
@@ -53,7 +71,7 @@ public class AJT_DealerHand : DealerHand
 					Invoke("HitMe", 1);
 				} else {
 					// once dealer stays, compares dealer and player hand values
-					BlackJackHand playerHand = GameObject.Find("Player Hand Value").GetComponent<BlackJackHand>();
+					BlackJackHand playerHand = GameObject.Find("Player Hand").GetComponent<BlackJackHand>();
 
 					if(handVals < playerHand.handVals){
 						//player wins if player has higher total than dealer
@@ -72,7 +90,7 @@ public class AJT_DealerHand : DealerHand
 		Reveal = true;
 
 
-		GameObject cardOne = transform.GetChild(0).gameObject;
+		GameObject cardOne = handBase.transform.GetChild(0).gameObject;
 
 		cardOne.GetComponentsInChildren<Image>()[0].sprite = null;
 		cardOne.GetComponentsInChildren<Image>()[1].enabled = true;

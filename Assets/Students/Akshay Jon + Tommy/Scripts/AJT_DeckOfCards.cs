@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AJT_DeckOfCards : DeckOfCards
-{    
+public class AJT_DeckOfCards : DeckOfCards {
+
+    //for hands to instantiate when drawing cards
+    public GameObject cardPrefab;
+
     //refs to avoid duplicate card shuffling
     [SerializeField] GameObject dealerHandGO, playerHandGO;
     AJT_DealerHand dealerHand;
