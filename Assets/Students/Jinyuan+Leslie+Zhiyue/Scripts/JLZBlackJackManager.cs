@@ -6,8 +6,46 @@ using System.Collections.Generic;
 
 public class JLZBlackJackManager : BlackJackManager
 {
+    ChipsManager chipsManager;
+    public void Awake()
+    {
+        chipsManager = GameObject.Find("ChipsManager").GetComponent<ChipsManager>();
+    }
 
-	public override int GetHandValue(List<DeckOfCards.Card> hand){
+    new public void PlayerBusted()
+    {
+        HidePlayerButtons();
+        GameOverText("YOU BUST", Color.red);
+        chipsManager.playerLose();
+    }
+
+    new public void DealerBusted()
+    {
+        GameOverText("DEALER BUSTS!", Color.green);
+        chipsManager.playerWin();
+    }
+
+    new public void PlayerWin()
+    {
+        GameOverText("YOU WIN!", Color.green);
+        chipsManager.playerWin();
+    }
+
+    new public void PlayerLose()
+    {
+        GameOverText("YOU LOSE.", Color.red);
+        chipsManager.playerLose();
+    }
+
+
+    new public void BlackJack()
+    {
+        GameOverText("Black Jack!", Color.green);
+        HidePlayerButtons();
+        chipsManager.playerWin();
+    }
+
+    public override int GetHandValue(List<DeckOfCards.Card> hand){
 		// get the sum of card value
 		int handValue = 0;
 		foreach(DeckOfCards.Card handCard in hand){
