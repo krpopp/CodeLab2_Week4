@@ -53,7 +53,7 @@ public class AJT_DeckOfCards : DeckOfCards {
                     }
                     //else remove that card from cardsToSkip
                     else {                
-                        deck.Add(new Card(type, suit));
+                        deck.Add(new AJT_Card(type, suit));
                         deckCount = deck.Count;
                     }
                 }

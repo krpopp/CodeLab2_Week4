@@ -10,12 +10,13 @@ public class AJT_Card : DeckOfCards.Card {
     }
 
 	public Enhanced enhanced;
-	/*
-	public AJT_Card(Type cardNum, Suit suit){		//constructor to declare a variable of type Card
-			this.cardNum = cardNum;
-			this.suit = suit;
+
+	public AJT_Card(Type cardNum, Suit suit) : base(cardNum, suit)
+	{       //constructor to declare a variable of type Card
+		this.cardNum = cardNum;
+		this.suit = suit;
 	}
-	*/
+
 
 	public override string ToString(){				//overrides the ToString function
 		return "The " + cardNum + " of " + suit;

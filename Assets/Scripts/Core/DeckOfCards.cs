@@ -38,7 +38,6 @@ public class DeckOfCards : MonoBehaviour {
 		};
 
 		public Type cardNum;		//variable of type Type
-		
 		public Suit suit;			//variable of type Suit
 
 		public Card(Type cardNum, Suit suit){		//constructor to declare a variable of type Card
