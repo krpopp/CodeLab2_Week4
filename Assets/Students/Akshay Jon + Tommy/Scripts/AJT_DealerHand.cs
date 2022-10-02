@@ -47,7 +47,7 @@ public class AJT_DealerHand : AJT_BlackJackHand {
 					manager.DealerBusted();
 					//draws new card for dealer if dealer is under 17
 				} else if(!DealStay(handVals)){
-					Invoke("HitMe", 1);
+					StartCoroutine(Hit());
 				} else {
 					// once dealer stays, compares dealer and player hand values
 					BlackJackHand playerHand = GameObject.Find("Player Hand").GetComponent<BlackJackHand>();
@@ -83,8 +83,9 @@ public class AJT_DealerHand : AJT_BlackJackHand {
 		ShowValue();
 	}
 
-	public override void Hit()
+	public override IEnumerator Hit()
     {
+		
         DeckOfCards.Card card = deck.DrawCard(); //Store card from top of deck
        
         GameObject cardObj = Instantiate(deck.GetComponent<AJT_DeckOfCards>().cardPrefab); //Instantiate prefab as that card
@@ -94,5 +95,6 @@ public class AJT_DealerHand : AJT_BlackJackHand {
         hand.Add(card); //Store card in local hand list
 
         ShowValue(); //Update scene UI to display hand total	
-    }
+		yield return new WaitForSecondsRealtime(1);
+	}
 }

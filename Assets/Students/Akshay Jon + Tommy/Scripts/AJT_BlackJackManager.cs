@@ -60,7 +60,9 @@ public class AJT_BlackJackManager : BlackJackManager
     new public void HidePlayerButtons() {
         hitButton.SetActive(false);
         stayButton.SetActive(false);
-    }
+		actionButtonOne.SetActive(false);
+		valueButton.SetActive(false);
+	}
 
     new public void BlackJack(){
         GameOverText("Black Jack!", Color.green);
@@ -74,7 +76,6 @@ public class AJT_BlackJackManager : BlackJackManager
 
     //Wrapped multiple button calls into one function that can be used to auto stay
     public void PlayerStays() {
-        HidePlayerButtons();
         GameObject.Find("Dealer Hand").GetComponent<AJT_DealerHand>().RevealDealer();
     }
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1053,7 +1053,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1749950760}
         m_TargetAssemblyTypeName: AJT_BlackJackHand, Assembly-CSharp
-        m_MethodName: Hit
+        m_MethodName: HitButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1993,6 +1993,7 @@ MonoBehaviour:
   xOffset: -110
   yOffset: -50
   handVals: 0
+  cardObj: {fileID: 0}
 --- !u!1 &1820751089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2129,6 +2130,7 @@ MonoBehaviour:
   xOffset: 0
   yOffset: 0
   handVals: 0
+  cardObj: {fileID: 0}
   cardBack: {fileID: 21300000, guid: 0ccb82e88f0254701b793b17ac71f82f, type: 3}
 --- !u!1 &1923503625
 GameObject:

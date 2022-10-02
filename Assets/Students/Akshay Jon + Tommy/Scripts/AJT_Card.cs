@@ -46,10 +46,13 @@ public class AJT_Card : DeckOfCards.Card {
 		return val;
 	}
 
-	public virtual void TriggerEnhancedCard() {
+	public virtual IEnumerator TriggerEnhancedCard() {
 		choosing = true;
 		blackJackManager.HidePlayerButtons();
 		blackJackManager.ShowValueButton(this);
+		while (choosing) {
+			yield return new WaitForFixedUpdate();
+		}
 		
 	}
 
@@ -64,6 +67,7 @@ public class AJT_Card : DeckOfCards.Card {
 	public virtual void UseValue()
 	{
 		usingValue = true;
+		choosing = false;
 		GameObject.Find("Player Hand").GetComponent<AJT_BlackJackHand>().GetValue();
 	}
 
