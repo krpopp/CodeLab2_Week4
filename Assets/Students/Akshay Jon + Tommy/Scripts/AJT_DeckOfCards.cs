@@ -52,9 +52,24 @@ public class AJT_DeckOfCards : DeckOfCards {
                         //Debug.Log("Removed the " + type + " of " + suit);
                     }
                     //else remove that card from cardsToSkip
-                    else {                
-                        deck.Add(new AJT_Card(type, suit));
-                        deckCount = deck.Count;
+                    else {
+                        switch ((int)type)
+                        {
+                            case 3:
+                                deck.Add(new AJT_SwapCard(type, suit));
+                                break;
+                            case 5:
+                                break;
+                            case 7:
+                                //deck.Add(new AJT_CopyCard(type, suit));
+                                break;
+                            case 9:
+                                break;
+                            default:
+                                deck.Add(new AJT_Card(type, suit));
+                                deckCount = deck.Count;
+                                break;
+                        }                                  
                     }
                 }
             }

@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class AJT_Card : DeckOfCards.Card {
 
-	public enum Enhanced {
-		VALUE,
-		ENHANCED
-    }
-
-	public Enhanced enhanced;
+	public bool enhanced;
+	public bool choosing;
 
 	public AJT_Card(Type cardNum, Suit suit) : base(cardNum, suit)
 	{       //constructor to declare a variable of type Card
@@ -42,6 +38,17 @@ public class AJT_Card : DeckOfCards.Card {
 		
 		return val;
 	}
+
+	public virtual void TriggerEnhancedCard() {
+		choosing = true;
+		while (choosing) {
+
+
+		}
+
+		GetCardEnhancedValue();
+	}
+
 
 	public virtual int GetCardEnhancedValue() {
 		int val = 0;
