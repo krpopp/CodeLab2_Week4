@@ -870,6 +870,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4f767ac643f588a4a8a1ab0400d16aea, type: 3}
   - {fileID: 21300000, guid: 6d0aaf17802e80848af3a36cab5f1f66, type: 3}
   - {fileID: 21300000, guid: 56fe9f934bae9a6449c78d74508638b5, type: 3}
+  cardPrefab: {fileID: 1000010573319028, guid: 65c974087b30bfb4f9f418bd1e0e4abd, type: 3}
   dealerHandGO: {fileID: 1831423594}
   playerHandGO: {fileID: 1749950756}
   deckCount: 0

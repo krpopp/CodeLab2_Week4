@@ -5,36 +5,16 @@ using UnityEngine.UI;
 
 //because this script inherits from DealerHand which in turn inherits from Black Jack Hand
 //the overidden functions from Black Jack hand is not made available to this.
-public class AJT_DealerHand : DealerHand
-{
-	//public accessor for hands
-	public List<DeckOfCards.Card> Hand { get { return hand; } }
+public class AJT_DealerHand : AJT_BlackJackHand {
 
-	//new private bool bc can't access base private bool
-    bool Reveal = false;
-
-    //BUG FIX
-    //removes the remaining cards from the previous round and sets up new hands
-	public void ResetHand() {
-		//This loop gave us so much trouble.
-		//We weren't grabbing all the children, and w/o DestroyImmediate the code doesn't execute in time for other calls
-        for (int i = handBase.transform.childCount - 1; i >= 0; i--) {
-            DestroyImmediate(handBase.transform.GetChild(i).gameObject);
-        }
-
-		SetupHand();
-    }
+	public Sprite cardBack;
+	bool reveal = false;
 
 	protected override void SetupHand(){
 		//this bool must be false before base.SetupHand to stop dealer from calling HitMe on the first frame of the next round
-		Reveal = false;
+		reveal = false;
 
-		//Set references
-		deck = GameObject.Find("Deck").GetComponent<DeckOfCards>();
-		hand = new List<DeckOfCards.Card>();
-		//Add two cards to player hand
-		HitMe();
-		HitMe();
+		base.SetupHand();
 
 		//hide first card, get child from handBase instead of own transform
 		GameObject cardOne = handBase.transform.GetChild(0).gameObject;
@@ -45,12 +25,11 @@ public class AJT_DealerHand : DealerHand
 	}
 
 
-	//Overriden to access new private bool reveal
+	//Overriden to make behavior different than players
     protected override void ShowValue(){
 		if(hand.Count > 1){
-
 			//shows value of dealer's revealed cards only
-			if(!Reveal){
+			if(!reveal){
 				//sets handVals to value of revealed card
 				handVals = hand[1].GetCardHighValue();
 
@@ -85,10 +64,13 @@ public class AJT_DealerHand : DealerHand
 		}
 	}
 
-	public void RevealDealer() {
-		//sets true when card is revealed
-		Reveal = true;
+	protected virtual bool DealStay(int handVal) {
+		return handVal > 17;
+	}
 
+	public virtual void RevealDealer() {
+		//sets true when card is revealed
+		reveal = true;
 
 		GameObject cardOne = handBase.transform.GetChild(0).gameObject;
 

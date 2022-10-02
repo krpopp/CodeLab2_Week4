@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class AJT_BlackJackHand : BlackJackHand {
 
-    public GameObject cardPrefab;
-
     //public accessor for hands
     public List<DeckOfCards.Card> Hand { get { return hand; } }
 
@@ -22,7 +20,7 @@ public class AJT_BlackJackHand : BlackJackHand {
 
     protected override void SetupHand() {
         //Set references
-        deck = GameObject.Find("Deck").GetComponent<AJT_DeckOfCards>();
+        deck = GameObject.Find("Deck").GetComponent<DeckOfCards>();
         hand = new List<DeckOfCards.Card>();
         //Add two cards to player hand
         Hit();
@@ -33,7 +31,7 @@ public class AJT_BlackJackHand : BlackJackHand {
 	public virtual void Hit(){
 		DeckOfCards.Card card = deck.DrawCard(); //Store card from top of deck
 
-		GameObject cardObj = Instantiate(Resources.Load("prefab/Card")) as GameObject; //Instantiate prefab as that card
+		GameObject cardObj = Instantiate(deck.GetComponent<AJT_DeckOfCards>().cardPrefab); //Instantiate prefab as that card
 
 		ShowCard(card, cardObj, hand.Count); //Update scene UI to display card correctly 
 
