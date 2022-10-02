@@ -5,7 +5,7 @@ using UnityEngine;
 public class AJT_BlackJackHand : BlackJackHand {
 
     //public accessor for hands
-    public List<DeckOfCards.Card> Hand { get { return hand; } }
+    public List<DeckOfCards.Card> Hand { get { return hand; } set { hand = value;} }
 
     //BUG FIX
     //removes the remaining cards from the previous round and sets up new hands
@@ -61,6 +61,11 @@ public class AJT_BlackJackHand : BlackJackHand {
             else
                 GameObject.Find("Game Manager").GetComponent<AJT_BlackJackManager>().PlayerStays();
         }
+    }
+
+    public void GetValue()
+    {
+        ShowValue();
     }
 
 

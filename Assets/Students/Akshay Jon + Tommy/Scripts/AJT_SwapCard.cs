@@ -12,6 +12,13 @@ public class AJT_SwapCard : AJT_Card
         this.suit = suit;
     }
 
+    public override void TriggerEnhancedCard()
+    {
+        base.TriggerEnhancedCard();
+
+        GameObject.Find("Game Manager").GetComponent<AJT_BlackJackManager>().ShowActionButtonOne(this, "SWAP");
+    }
+
     public override int GetCardEnhancedValue()
     {
         return base.GetCardEnhancedValue();
@@ -19,15 +26,17 @@ public class AJT_SwapCard : AJT_Card
 
     }
 
-    public override void TriggerEnhancedCard()
+    public override void ActionOne()
     {
-        base.TriggerEnhancedCard();
-         //while (choosing)
-        {
-            
-            //need valueButton and whatever else to make choosing false
+        AJT_BlackJackHand dealerHand = GameObject.Find("Dealer Hand").GetComponent<AJT_DealerHand>();
+        AJT_BlackJackHand playerHand = GameObject.Find("Player Hand").GetComponent<AJT_BlackJackHand>();
+        DeckOfCards.Card dealerCard = dealerHand.Hand[1];
 
-        }
+        playerHand.Hand.Remove(this);
+        playerHand.Hand.Add(dealerCard);
+        playerHand.GetValue();
 
+        dealerHand.Hand[1] = this;
+        dealerHand.GetValue();
     }
 }
