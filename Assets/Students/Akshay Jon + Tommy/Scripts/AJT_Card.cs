@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class AJT_Card : DeckOfCards.Card {
 
-	public bool enhanced;
+
 	public bool choosing;
+	AJT_BlackJackManager blackJackManager = GameObject.FindObjectOfType<AJT_BlackJackManager>();
 
 	public AJT_Card(Type cardNum, Suit suit) : base(cardNum, suit)
 	{       //constructor to declare a variable of type Card
@@ -41,12 +42,9 @@ public class AJT_Card : DeckOfCards.Card {
 
 	public virtual void TriggerEnhancedCard() {
 		choosing = true;
-		while (choosing) {
-
-
-		}
-
-		GetCardEnhancedValue();
+		blackJackManager.HidePlayerButtons();
+		blackJackManager.ShowValueButton();
+		
 	}
 
 

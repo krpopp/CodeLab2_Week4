@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AJT_BlackJackManager : BlackJackManager
 {
     //BUG FIX
     //references to access inactive game objects
-	[SerializeField] GameObject hitButton, stayButton;
+	[SerializeField] GameObject hitButton, stayButton, valueButton;
 
 
 	//function to return the total from the cards in hand
@@ -15,7 +16,13 @@ public class AJT_BlackJackManager : BlackJackManager
 
 		//Get highest possible total of hand
 		foreach(DeckOfCards.Card handCard in hand){
-			handValue += handCard.GetCardHighValue();
+			if (!(handCard is AJT_Card))
+				handValue += handCard.GetCardHighValue();
+			else
+			{
+				AJT_Card c = handCard as AJT_Card;
+				handValue += c.GetCardValue();
+			}
 		}
         //BUG FIX
         //Checks if the total is over 21 and incrementally change ace values
@@ -68,4 +75,11 @@ public class AJT_BlackJackManager : BlackJackManager
         HidePlayerButtons();
         GameObject.Find("Dealer Hand").GetComponent<AJT_DealerHand>().RevealDealer();
     }
+
+	public void ShowValueButton(AJT_Card card)
+	{
+		valueButton.SetActive(true);
+		Button b = valueButton.GetComponent<Button>();
+		b.onClick.AddListener(card.
+	}
 }

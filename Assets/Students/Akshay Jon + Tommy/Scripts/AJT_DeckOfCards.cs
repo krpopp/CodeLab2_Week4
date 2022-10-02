@@ -66,7 +66,7 @@ public class AJT_DeckOfCards : DeckOfCards {
                             case 9:
                                 break;
                             default:
-                                deck.Add(new AJT_Card(type, suit));
+                                deck.Add(new Card(type, suit));
                                 deckCount = deck.Count;
                                 break;
                         }                                  
@@ -78,7 +78,8 @@ public class AJT_DeckOfCards : DeckOfCards {
 
 	//returns and removes the next card from the deck
 	public override Card DrawCard() {
-		Card nextCard = deck.Next();
+		var nextCard = deck.Next();
+        
 
         //BUGFIX; remove the card from the shufflebag
         deck.Remove(nextCard);

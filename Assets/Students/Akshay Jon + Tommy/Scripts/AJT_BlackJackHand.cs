@@ -30,8 +30,13 @@ public class AJT_BlackJackHand : BlackJackHand {
     //Function to add card to player hand, calls all other functions in this class
 	public virtual void Hit(){
 		DeckOfCards.Card card = deck.DrawCard(); //Store card from top of deck
+        if (card is AJT_Card)
+        {
+            AJT_Card enhancedCard = card as AJT_Card;
+            enhancedCard.TriggerEnhancedCard();
+        }
 
-		GameObject cardObj = Instantiate(deck.GetComponent<AJT_DeckOfCards>().cardPrefab); //Instantiate prefab as that card
+        GameObject cardObj = Instantiate(deck.GetComponent<AJT_DeckOfCards>().cardPrefab); //Instantiate prefab as that card
 
 		ShowCard(card, cardObj, hand.Count); //Update scene UI to display card correctly 
 

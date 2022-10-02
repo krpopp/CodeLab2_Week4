@@ -82,4 +82,17 @@ public class AJT_DealerHand : AJT_BlackJackHand {
 		//updates value of dealer hand
 		ShowValue();
 	}
+
+	public override void Hit()
+    {
+        DeckOfCards.Card card = deck.DrawCard(); //Store card from top of deck
+       
+        GameObject cardObj = Instantiate(deck.GetComponent<AJT_DeckOfCards>().cardPrefab); //Instantiate prefab as that card
+
+        ShowCard(card, cardObj, hand.Count); //Update scene UI to display card correctly 
+
+        hand.Add(card); //Store card in local hand list
+
+        ShowValue(); //Update scene UI to display hand total	
+    }
 }
