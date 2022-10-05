@@ -66,5 +66,4 @@ public class JLZBlackJackManager : BlackJackManager
         return handValue;
 	}
 
-    
 }
