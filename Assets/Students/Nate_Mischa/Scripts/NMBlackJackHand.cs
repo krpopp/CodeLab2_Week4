@@ -152,6 +152,9 @@ public class NMBlackJackHand : BlackJackHand
         Transform tempTransform = new RectTransform();
         DeckOfCards.Card tempCard = new DeckOfCards.Card(DeckOfCards.Card.Type.A,DeckOfCards.Card.Suit.CLUBS);
         
+        //if dealer's card is the first one which is also the face down one, then reveal it
+        dealerHand.RevealCardWhenSwap();
+
         //swap hand value
         tempCard = hand[playersCard.GetComponent<RectTransform>().GetSiblingIndex()];
         hand[playersCard.GetComponent<RectTransform>().GetSiblingIndex()] =

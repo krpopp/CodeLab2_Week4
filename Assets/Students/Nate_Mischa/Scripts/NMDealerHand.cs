@@ -36,7 +36,45 @@ public class NMDealerHand : DealerHand
 	
 	protected override void ShowValue()
 	{
-		base.ShowValue();
+		if(hand.Count > 1)
+		{
+			if(!reveal)
+			{
+				handVals = hand[1].GetCardHighValue();
+
+				total.text = "Dealer: " + handVals + " + ???";
+			} 
+			else 
+			{
+				handVals = GetHandValue();
+
+				total.text = "Dealer: " + handVals;
+
+				BlackJackManager manager = GameObject.Find("Game Manager").GetComponent<BlackJackManager>();
+
+				if(handVals > 21)
+				{
+					manager.DealerBusted();
+				} 
+				else if(!DealStay(handVals))
+				{
+					Invoke("HitMe", 1);
+				} 
+				else 
+				{
+					BlackJackHand playerHand = GameObject.Find("Player Hand Value").GetComponent<BlackJackHand>();
+					
+					if(handVals < playerHand.handVals)
+					{
+						manager.PlayerWin();
+					} 
+					else 
+					{
+						manager.PlayerLose();
+					}
+				}
+			}
+		}
 		//Bug4&6: When dealer draws or natural BlackJack, call BlackJack
 		if (handVals == 21)
 		{
@@ -63,5 +101,15 @@ public class NMDealerHand : DealerHand
 	public DeckOfCards.Card GetDealerHandVale(int cardIndex)
 	{
 		return hand[cardIndex];
+	}
+
+	public void RevealCardWhenSwap()
+	{
+		GameObject cardOne = transform.GetChild(0).gameObject;
+
+		cardOne.GetComponentsInChildren<Image>()[0].sprite = null;
+		cardOne.GetComponentsInChildren<Image>()[1].enabled = true;
+
+		ShowCard(hand[0], cardOne, 0);
 	}
 }

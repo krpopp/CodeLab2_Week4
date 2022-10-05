@@ -35,7 +35,6 @@ public class BlackJackHand : MonoBehaviour {
 			ShowCard(card, cardObj, hand.Count);
 
 			hand.Add(card);
-			Debug.Log(hand[hand.Count - 1].cardNum + " " + hand[hand.Count - 1].suit);
 
 			ShowValue();
 		}
