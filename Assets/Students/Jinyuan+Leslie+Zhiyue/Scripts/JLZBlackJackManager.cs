@@ -16,25 +16,27 @@ public class JLZBlackJackManager : BlackJackManager
     {
         HidePlayerButtons();
         GameOverText("YOU BUST", Color.red);
-        chipsManager.playerLose();
+        //chipsManager.playerLose();
     }
 
     new public void DealerBusted()
     {
         GameOverText("DEALER BUSTS!", Color.green);
-        chipsManager.playerWin();
+        Debug.Log("test");
+        chipsManager.PlayerWin();
     }
 
     new public void PlayerWin()
     {
         GameOverText("YOU WIN!", Color.green);
-        chipsManager.playerWin();
+        Debug.Log("test");
+        chipsManager.PlayerWin();
     }
 
     new public void PlayerLose()
     {
         GameOverText("YOU LOSE.", Color.red);
-        chipsManager.playerLose();
+        //chipsManager.playerLose();
     }
 
 
@@ -42,7 +44,8 @@ public class JLZBlackJackManager : BlackJackManager
     {
         GameOverText("Black Jack!", Color.green);
         HidePlayerButtons();
-        chipsManager.playerWin();
+        Debug.Log("test");
+        chipsManager.PlayerWin();
     }
 
     public override int GetHandValue(List<DeckOfCards.Card> hand){

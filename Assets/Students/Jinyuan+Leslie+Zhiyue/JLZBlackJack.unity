@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -726,7 +726,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1823248414}
         m_TargetAssemblyTypeName: ChipsManager, Assembly-CSharp
-        m_MethodName: tenAdd
+        m_MethodName: TenAdd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -981,7 +981,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1823248414}
         m_TargetAssemblyTypeName: ChipsManager, Assembly-CSharp
-        m_MethodName: hundredAdd
+        m_MethodName: HundredAdd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1707,7 +1707,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1823248414}
         m_TargetAssemblyTypeName: ChipsManager, Assembly-CSharp
-        m_MethodName: fiveReduce
+        m_MethodName: FiveReduce
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2202,7 +2202,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1823248414}
         m_TargetAssemblyTypeName: ChipsManager, Assembly-CSharp
-        m_MethodName: fiftyReduce
+        m_MethodName: FiftyReduce
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2572,7 +2572,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1823248414}
         m_TargetAssemblyTypeName: ChipsManager, Assembly-CSharp
-        m_MethodName: fiveAdd
+        m_MethodName: FiveAdd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2788,7 +2788,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1823248414}
         m_TargetAssemblyTypeName: ChipsManager, Assembly-CSharp
-        m_MethodName: hundredReduce
+        m_MethodName: HundredReduce
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3103,7 +3103,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1823248414}
         m_TargetAssemblyTypeName: ChipsManager, Assembly-CSharp
-        m_MethodName: fiftyAdd
+        m_MethodName: FiftyAdd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3527,8 +3527,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ae8290eac4c9749986d422eff0680a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startChips: 500
-  allChipsAmount: 0
   thisRoundChips: 0
   allChipText: {fileID: 2111464997}
   thisRoundText: {fileID: 801065956}
@@ -4508,7 +4506,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1823248414}
         m_TargetAssemblyTypeName: ChipsManager, Assembly-CSharp
-        m_MethodName: tenReduce
+        m_MethodName: TenReduce
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class ChipsManager : MonoBehaviour
 {
-    [SerializeField] private int startChips = 500;
-    public int allChipsAmount;
+    [SerializeField] private const int START_CHIPS = 500;
+    public static int allChipsAmount = START_CHIPS;
     public int thisRoundChips = 0;
 
     [SerializeField] private Text allChipText;
@@ -16,9 +16,12 @@ public class ChipsManager : MonoBehaviour
     //each chip amount text
     [SerializeField] private Text five,ten,fifty,hundred;
 
+
     private void Awake()
     {
-        allChipsAmount = startChips;
+        if(allChipsAmount == 0) allChipsAmount = START_CHIPS;
+
+        ResetChips();
     }
 
     private void AddChips(int chipsPoints,Text eachChipAmout)
@@ -55,57 +58,59 @@ public class ChipsManager : MonoBehaviour
             error.text = "There is no chip to be reduced!";
     }
 
-    public void fiveAdd()
+    public void FiveAdd()
     {
         AddChips(5, five);
     }
-    public void fiveReduce()
+    public void FiveReduce()
     {
         ReduceChips(5, five);
     }
 
-    public void tenAdd()
+    public void TenAdd()
     {
         AddChips(10, ten);
     }
-    public void tenReduce()
+    public void TenReduce()
     {
         ReduceChips(10, ten);
     }
 
-    public void fiftyAdd()
+    public void FiftyAdd()
     {
         AddChips(50, fifty);
     }
-    public void fiftyReduce()
+    public void FiftyReduce()
     {
         ReduceChips(50, fifty);
     }
 
 
-    public void hundredAdd()
+    public void HundredAdd()
     {
         AddChips(100, hundred);
     }
-    public void hundredReduce()
+    public void HundredReduce()
     {
         ReduceChips(100, hundred);
     }
 
-    public void playerWin()
+    public void PlayerWin()
     {
         allChipsAmount += thisRoundChips * 2;
-        allChipText.text = allChipsAmount.ToString();
-        Reset();
+        Debug.Log(allChipsAmount);
     }
 
+    /*
     public void playerLose()
     {
-        Reset();
+        ResetChips();
     }
+    */
 
-    private void Reset()
+    private void ResetChips()
     {
+        allChipText.text = allChipsAmount.ToString();
         five.text = 0.ToString();
         ten.text = 0.ToString();
         fifty.text = 0.ToString();

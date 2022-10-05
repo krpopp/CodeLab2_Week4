@@ -34,7 +34,7 @@ public class JLZDeckOfCards : DeckOfCards
     // Bug Fixed: Remove a card each time drawing a card
     public override Card DrawCard()
     {
-        Debug.Log("Cards in Deck: " + deck.Count);
+        //Debug.Log("Cards in Deck: " + deck.Count);
         Card nextCard = deck.Next();
 
         deck.Remove(nextCard);
