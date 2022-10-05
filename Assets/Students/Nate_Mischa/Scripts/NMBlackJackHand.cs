@@ -16,6 +16,8 @@ public class NMBlackJackHand : BlackJackHand
     bool hold = false;
     bool swapSelect = false;
 
+    public GameObject SelectedCard;
+
     protected override void ShowValue()
     {
         handVals = GetHandValue(); //get player hand value
@@ -82,13 +84,14 @@ public class NMBlackJackHand : BlackJackHand
             {
                 Debug.Log(gameObject.name);
                 Debug.Log(result.gameObject.name);
+
+                cardObj = SelectedCard;
             }
         }
     }
 
     public void SwapMe()
     {
-
         swapSelect = true;
     }
 }
