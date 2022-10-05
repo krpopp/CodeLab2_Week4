@@ -13,9 +13,8 @@ public class NMBlackJackManager : BlackJackManager
     public NMBlackJackHand nMBlackJackHand;
     public NMDealerHand nMDealerHand;
 
-    public Button SwapButton;
-
     bool clickableCard = true;
+    bool playerBust = false;
 
     private void Start()
     {

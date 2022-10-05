@@ -9,6 +9,8 @@ public class NMBlackJackHand : BlackJackHand
     public Button SwapButton;
 
     bool hold = false;
+    bool playerBust = false;
+    bool blackJack = false;
 
     protected override void ShowValue()
     {
@@ -21,11 +23,13 @@ public class NMBlackJackHand : BlackJackHand
             GameObject.Find("Game Manager").GetComponent<BlackJackManager>().PlayerBusted();
             //Bug1: called when player bust(dealer show hands value)
             dealerHand.RevealCardWhenPlayerBust();
+            playerBust = true;
         }
         //Bug2&6: call blackjack when player hit 21 or natural Blackjack
         else if (handVals == 21)
         {
             GameObject.Find("Game Manager").GetComponent<BlackJackManager>().BlackJack(); //call GM
+            blackJack = true;
         }
     }
     
@@ -53,7 +57,11 @@ public class NMBlackJackHand : BlackJackHand
 
             ShowValue(); //update value
 
-            SwapButton.interactable = true; //trigger swap button
+            SwapButton.interactable = true; //make swap button interactable
+        }
+        else if (playerBust == true || blackJack == true) //if bust or blackjack
+        {
+            SwapButton.interactable = false; //set to false
         }
     }
 }
