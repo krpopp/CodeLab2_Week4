@@ -148,13 +148,22 @@ public class NMBlackJackHand : BlackJackHand
 
     public void SwapCards(GameObject playersCard, GameObject dealersCard)
     {
+        int originalPlayerIndex;
+        int originalDealerIndex;
         Vector3 tempPosition = Vector3.zero;
         Transform tempTransform = new RectTransform();
         DeckOfCards.Card tempCard = new DeckOfCards.Card(DeckOfCards.Card.Type.A,DeckOfCards.Card.Suit.CLUBS);
         
         //if dealer's card is the first one which is also the face down one, then reveal it
-        dealerHand.RevealCardWhenSwap();
+        if (dealersCard.GetComponent<RectTransform>().GetSiblingIndex() == 0)
+        {
+            dealerHand.RevealCardWhenSwap();
+            dealerHand.isSwapped = true;
+        }
 
+        originalPlayerIndex = playersCard.GetComponent<RectTransform>().GetSiblingIndex();
+        originalDealerIndex = dealersCard.GetComponent<RectTransform>().GetSiblingIndex();
+        
         //swap hand value
         tempCard = hand[playersCard.GetComponent<RectTransform>().GetSiblingIndex()];
         hand[playersCard.GetComponent<RectTransform>().GetSiblingIndex()] =
@@ -162,14 +171,18 @@ public class NMBlackJackHand : BlackJackHand
         dealerHand.SetDealerHandValue(dealersCard.GetComponent<RectTransform>().GetSiblingIndex(),tempCard);
         ShowValue();
         
-        //swap card1 and card2 rect position
+        //swap playersCard and dealersCard rect position
         tempPosition = playersCard.GetComponent<RectTransform>().position;
         playersCard.GetComponent<RectTransform>().position = dealersCard.GetComponent<RectTransform>().position;
         dealersCard.GetComponent<RectTransform>().position = tempPosition;
         
-        //swap card1 and card2 parent
-        tempTransform = playersCard.GetComponent<RectTransform>();
+        //swap playersCard and dealersCard parent
+        tempTransform = playersCard.GetComponent<RectTransform>().parent;
         playersCard.GetComponent<RectTransform>().parent = dealersCard.GetComponent<RectTransform>().parent;
         dealersCard.GetComponent<RectTransform>().parent = tempTransform;
+        
+        //swap playersCard and dealersCard child order
+        playersCard.GetComponent<RectTransform>().SetSiblingIndex(originalPlayerIndex);
+        dealersCard.GetComponent<RectTransform>().SetSiblingIndex(originalDealerIndex);
     }
 }

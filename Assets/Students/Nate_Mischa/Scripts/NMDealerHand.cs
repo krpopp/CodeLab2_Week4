@@ -17,6 +17,7 @@ using UnityEngine.UI;
 public class NMDealerHand : DealerHand
 {
 	bool reveal;
+	public bool isSwapped;
 	
 	//Bug1: called when player bust
 	//Called when player bust, show dealer's hand and update text
@@ -40,9 +41,18 @@ public class NMDealerHand : DealerHand
 		{
 			if(!reveal)
 			{
-				handVals = hand[1].GetCardHighValue();
+				if (!isSwapped)
+				{
+					handVals = hand[1].GetCardHighValue();
 
-				total.text = "Dealer: " + handVals + " + ???";
+					total.text = "Dealer: " + handVals + " + ???";
+				}
+				else
+				{
+					handVals = GetHandValue();
+			
+					total.text = "Dealer: " + handVals;
+				}
 			} 
 			else 
 			{

@@ -347,7 +347,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0, g: 1, b: 0.07855177, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1332,6 +1332,8 @@ MonoBehaviour:
   hitMe: {fileID: 0}
   dealerHand: {fileID: 1831423598}
   SwapButton: {fileID: 417147155}
+  SelectedCard: {fileID: 0}
+  playersCard: 0
 --- !u!1 &1831423594
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,6 +1433,7 @@ MonoBehaviour:
   handBase: {fileID: 1831423594}
   handVals: 0
   cardBack: {fileID: 21300000, guid: 0ccb82e88f0254701b793b17ac71f82f, type: 3}
+  isSwapped: 0
 --- !u!1 &1923503625
 GameObject:
   m_ObjectHideFlags: 0
