@@ -38,10 +38,12 @@ public class JLZDealerHand : BlackJackHand
                 total.text = "Dealer: " + handVals;
 
                 BlackJackManager manager = GameObject.Find("Game Manager").GetComponent<BlackJackManager>();
+                ChipsManager chipsManager = GameObject.Find("ChipsManager").GetComponent<ChipsManager>();
 
                 if (handVals > 21)
                 {
                     manager.DealerBusted();
+                    chipsManager.PlayerWin();
                 }
                 else if (!DealStay(handVals))
                 {
@@ -49,8 +51,7 @@ public class JLZDealerHand : BlackJackHand
                 }
                 else
                 {
-                    BlackJackHand playerHand = GameObject.Find("Player Hand Value").GetComponent<BlackJackHand>();
-                    ChipsManager chipsManager = GameObject.Find("ChipsManager").GetComponent<ChipsManager>();
+                    BlackJackHand playerHand = GameObject.Find("Player Hand Value").GetComponent<BlackJackHand>();           
 
                     if (handVals < playerHand.handVals)
                     {
