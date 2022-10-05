@@ -14,26 +14,10 @@ public class NMBlackJackManager : BlackJackManager
     public NMDealerHand nMDealerHand;
 
     bool clickableCard = true;
-    bool playerBust = false;
 
     private void Start()
     {
         deck = GameObject.Find("Deck").GetComponent<NMDeckOfCards>(); //get deck
-    }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            PointerEventData eventData = new PointerEventData(EventSystem.current);
-            eventData.position =  Input.mousePosition;
-            List<RaycastResult> raycastResults = new List<RaycastResult>();
-            EventSystem.current.RaycastAll( eventData, raycastResults );
-            foreach (var result in raycastResults)
-            {
-                Debug.Log(result.gameObject.name);
-            }
-        }
     }
 
     public override int GetHandValue(List<DeckOfCards.Card> hand)
@@ -81,7 +65,5 @@ public class NMBlackJackManager : BlackJackManager
             nMDealerHand.ReSetUpHand(); //reset dealer hand
             nMBlackJackHand.ReSetUpHand(); //reset player hand
         }
-    }
-    
-    
+    } 
 }

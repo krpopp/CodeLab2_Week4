@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class NMBlackJackHand : BlackJackHand
@@ -8,9 +10,11 @@ public class NMBlackJackHand : BlackJackHand
 
     public Button SwapButton;
 
-    bool hold = false;
     bool playerBust = false;
     bool blackJack = false;
+
+    bool hold = false;
+    bool swapSelect = false;
 
     protected override void ShowValue()
     {
@@ -58,10 +62,33 @@ public class NMBlackJackHand : BlackJackHand
             ShowValue(); //update value
 
             SwapButton.interactable = true; //make swap button interactable
+
+            if (playerBust == true || blackJack == true) //if bust or blackjack
+            {
+                SwapButton.interactable = false; //set to false
+            }
         }
-        else if (playerBust == true || blackJack == true) //if bust or blackjack
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && swapSelect == true) //if left mouse is clicked && swapSelect is true
         {
-            SwapButton.interactable = false; //set to false
+            PointerEventData eventData = new PointerEventData(EventSystem.current); //trigger raycasting
+            eventData.position = Input.mousePosition; //get input
+            List<RaycastResult> raycastResults = new List<RaycastResult>(); //generate list of raycasted objects
+            EventSystem.current.RaycastAll(eventData, raycastResults); //update list with raycast
+            foreach (var result in raycastResults) //debug results, check if objects have been clicked
+            {
+                Debug.Log(gameObject.name);
+                Debug.Log(result.gameObject.name);
+            }
         }
+    }
+
+    public void SwapMe()
+    {
+
+        swapSelect = true;
     }
 }
