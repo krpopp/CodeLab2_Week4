@@ -53,4 +53,15 @@ public class NMDealerHand : DealerHand
 		hand.Clear(); //clear hand
 		SetupHand(); //reset hand
 	}
+
+	public void SetDealerHandValue(int cardIndex,DeckOfCards.Card newCard)
+	{
+		hand[cardIndex] = newCard;
+		ShowValue();
+	}
+
+	public DeckOfCards.Card GetDealerHandVale(int cardIndex)
+	{
+		return hand[cardIndex];
+	}
 }

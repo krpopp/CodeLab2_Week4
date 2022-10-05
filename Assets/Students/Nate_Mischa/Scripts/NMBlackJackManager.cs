@@ -62,8 +62,9 @@ public class NMBlackJackManager : BlackJackManager
             //clear all cards from scene
             //store cards removed from play
             //update the deck to exclude removed cards
-            nMDealerHand.ReSetUpHand(); //reset dealer hand
-            nMBlackJackHand.ReSetUpHand(); //reset player hand
+            //nMDealerHand.ReSetUpHand(); //reset dealer hand
+            //nMBlackJackHand.ReSetUpHand(); //reset player hand
+            SceneManager.LoadScene(loadScene);
         }
     } 
 }
