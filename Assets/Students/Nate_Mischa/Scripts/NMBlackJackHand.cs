@@ -1,9 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NMBlackJackHand : BlackJackHand
 {
-    
+    public NMBlackJackHand hitMe;
     public NMDealerHand dealerHand;
+
+    public Button SwapButton;
+
+    bool hold = false;
+
     protected override void ShowValue()
     {
         handVals = GetHandValue(); //get player hand value
@@ -31,5 +37,23 @@ public class NMBlackJackHand : BlackJackHand
         }
         hand.Clear(); //clear hand
         SetupHand(); //reset hand
+    }
+
+    public void HitMe()
+    {
+        if (!hold)
+        {
+            DeckOfCards.Card card = deck.DrawCard(); //draw new card
+
+            GameObject cardObj = Instantiate(Resources.Load("prefab/Card")) as GameObject; //instantiate visuals
+
+            ShowCard(card, cardObj, hand.Count); //reveal card
+
+            hand.Add(card); //add to hand
+
+            ShowValue(); //update value
+
+            SwapButton.interactable = true; //trigger swap button
+        }
     }
 }

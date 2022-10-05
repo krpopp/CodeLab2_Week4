@@ -13,6 +13,10 @@ public class NMBlackJackManager : BlackJackManager
     public NMBlackJackHand nMBlackJackHand;
     public NMDealerHand nMDealerHand;
 
+    public Button SwapButton;
+
+    bool clickableCard = true;
+
     private void Start()
     {
         deck = GameObject.Find("Deck").GetComponent<NMDeckOfCards>(); //get deck
