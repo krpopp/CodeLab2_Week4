@@ -32,5 +32,4 @@ public class NMBlackJackHand : BlackJackHand
         hand.Clear(); //clear hand
         SetupHand(); //reset hand
     }
-    
 }
