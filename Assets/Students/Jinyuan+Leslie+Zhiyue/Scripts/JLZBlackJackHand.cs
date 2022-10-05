@@ -17,9 +17,10 @@ public class JLZBlackJackHand : BlackJackHand {
 		// BUG FIX: BlackJack when player starts with 21
 		if (handVals == 21)
 		{
-            JLZBlackJackManager manager = GameObject.Find("Game Manager").GetComponent<JLZBlackJackManager>();
-			manager.BlackJack();
-
+            JLZBlackJackManager gameManager = GameObject.Find("Game Manager").GetComponent<JLZBlackJackManager>();
+			ChipsManager chipsManager = GameObject.Find("ChipsManager").GetComponent<ChipsManager>();
+            gameManager.BlackJack();
+			chipsManager.PlayerWin();
         }
 	}
 	
@@ -33,6 +34,7 @@ public class JLZBlackJackHand : BlackJackHand {
 		// if the sum value of cards are above 21, the player busts
 		if(handVals > 21){
 			GameObject.Find("Game Manager").GetComponent<JLZBlackJackManager>().PlayerBusted();
-		}
+
+        }
 	}
 }

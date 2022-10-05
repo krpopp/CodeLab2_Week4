@@ -11,7 +11,7 @@ public class JLZBlackJackManager : BlackJackManager
     {
         chipsManager = GameObject.Find("ChipsManager").GetComponent<ChipsManager>();
     }
-
+    /*
     new public void PlayerBusted()
     {
         HidePlayerButtons();
@@ -22,14 +22,12 @@ public class JLZBlackJackManager : BlackJackManager
     new public void DealerBusted()
     {
         GameOverText("DEALER BUSTS!", Color.green);
-        Debug.Log("test");
         chipsManager.PlayerWin();
     }
 
     new public void PlayerWin()
     {
         GameOverText("YOU WIN!", Color.green);
-        Debug.Log("test");
         chipsManager.PlayerWin();
     }
 
@@ -44,9 +42,9 @@ public class JLZBlackJackManager : BlackJackManager
     {
         GameOverText("Black Jack!", Color.green);
         HidePlayerButtons();
-        Debug.Log("test");
         chipsManager.PlayerWin();
     }
+    */
 
     public override int GetHandValue(List<DeckOfCards.Card> hand){
 		// get the sum of card value
@@ -65,16 +63,6 @@ public class JLZBlackJackManager : BlackJackManager
 			}
 			i++;
 		}
-		//if (handValue > 21)
-		//{
-           // foreach (DeckOfCards.Card handCard in hand)
-            //{
-                //if(handCard.GetCardHighValue() == 11)
-				//{
-					//handValue -= 10;
-				//}
-           // }
-        //}
         return handValue;
 	}
 }
