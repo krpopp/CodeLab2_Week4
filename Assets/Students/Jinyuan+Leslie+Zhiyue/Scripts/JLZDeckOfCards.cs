@@ -4,40 +4,41 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 
-public class JLZDeckOfCards : DeckOfCards{
+public class JLZDeckOfCards : DeckOfCards
+{
 
+    public Text cardsLeft;
 
-	//Bug Fixed: Use 4 decks of cards instead of 1 deck
-	protected override void AddCardsToDeck(){
-		for(int i = 0; i < 4; i++)
-        {
-			foreach (Card.Suit suit in Card.Suit.GetValues(typeof(Card.Suit)))
-			{
-				foreach (Card.Type type in Card.Type.GetValues(typeof(Card.Type)))
-				{
-					deck.Add(new Card(type, suit));
-				}
-			}
-		}
-		
-	}
+    // Mod: show how many cards in the deck are left 
+    private void Update()
+    {
+        if(deck != null) cardsLeft.text = "Cards in the Deck: " + deck.Count;
 
-	// BUG FIX: reshuffle deck when it has less than 20 cards
+    }
+
+    // Bug Fixed: Use 4 decks of cards instead of 1 deck
+    // Mod: still keep using 1 deck of cards
+    protected override void AddCardsToDeck()
+    {
+        base.AddCardsToDeck();
+    }
+
+    // BUG FIX: reshuffle deck when it has less than 20 cards
+    // Mod: reshuffle deck when it is empty
     protected override bool IsValidDeck()
     {
-        return deck != null && deck.Count >= 20;
+        return deck != null && deck.Count > 0;
     }
 
 
     // Bug Fixed: Remove a card each time drawing a card
     public override Card DrawCard()
     {
-		Card nextCard = deck.Next();
+        Debug.Log("Cards in Deck: " + deck.Count);
+        Card nextCard = deck.Next();
 
-		deck.Remove(nextCard);
+        deck.Remove(nextCard);
 
-		Debug.Log("Cards in Deck: " + deck.Count);
-
-		return nextCard;
-	}
+        return nextCard;
+    }
 }
