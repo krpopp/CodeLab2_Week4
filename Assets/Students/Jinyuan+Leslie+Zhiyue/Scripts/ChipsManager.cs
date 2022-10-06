@@ -36,7 +36,7 @@ public class ChipsManager : MonoBehaviour
 
         foreach (Button button in stayHitButtons)
         {
-            button.enabled = false;
+            button.interactable = false;
         }
 
     }
@@ -160,12 +160,12 @@ public class ChipsManager : MonoBehaviour
 
         foreach (Button button in stayHitButtons)
         {
-            button.enabled = true;
+            button.interactable = true;
         }
 
         foreach (Button button in chipButtons)
         {
-            button.enabled = false;
+            button.interactable = false;
         }
     }
 }
