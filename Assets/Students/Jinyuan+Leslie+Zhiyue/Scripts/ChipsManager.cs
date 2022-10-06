@@ -16,12 +16,29 @@ public class ChipsManager : MonoBehaviour
     //each chip amount text
     [SerializeField] private Text five,ten,fifty,hundred;
 
+    public JLZBlackJackHand playerHand;
+    public JLZDealerHand dealerHand;
+
+    public Button[] chipButtons;
+    public Button[] stayHitButtons;
 
     private void Awake()
     {
         if(allChipsAmount == 0) allChipsAmount = START_CHIPS;
 
         ResetChips();
+    }
+
+    private void Start()
+    {
+        playerHand = GameObject.Find("Player Hand Value").GetComponent<JLZBlackJackHand>();
+        dealerHand = GameObject.Find("Dealer Hand Value").GetComponent<JLZDealerHand>();
+
+        foreach (Button button in stayHitButtons)
+        {
+            button.enabled = false;
+        }
+
     }
 
     private void AddChips(int chipsPoints,Text eachChipAmout)
@@ -117,5 +134,38 @@ public class ChipsManager : MonoBehaviour
         hundred.text = 0.ToString();
         thisRoundText.text = 0.ToString();
         thisRoundChips = 0;
+    }
+
+    public void StartBuffet()
+    {
+        playerHand.HitMe();
+        playerHand.HitMe();
+
+        if(playerHand.handVals == 21)
+        {
+            JLZBlackJackManager gameManager = GameObject.Find("Game Manager").GetComponent<JLZBlackJackManager>();
+            gameManager.BlackJack();
+            PlayerWin();
+        }
+
+        dealerHand.HitMe();
+        dealerHand.HitMe();
+
+        GameObject cardOne = dealerHand.transform.GetChild(0).gameObject;
+        cardOne.GetComponentInChildren<Text>().text = "";
+        cardOne.GetComponentsInChildren<Image>()[0].sprite = dealerHand.cardBack;
+        cardOne.GetComponentsInChildren<Image>()[1].enabled = false;
+
+        dealerHand.reveal = false;
+
+        foreach (Button button in stayHitButtons)
+        {
+            button.enabled = true;
+        }
+
+        foreach (Button button in chipButtons)
+        {
+            button.enabled = false;
+        }
     }
 }

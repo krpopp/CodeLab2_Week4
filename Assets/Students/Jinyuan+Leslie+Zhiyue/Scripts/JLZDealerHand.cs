@@ -2,14 +2,15 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class JLZDealerHand : BlackJackHand
+public class JLZDealerHand : JLZBlackJackHand
 {
     public Sprite cardBack;
 
-    bool reveal;
+    public bool reveal;
 
-    protected override void SetupHand()
+    /* protected override void SetupHand()
     {
+
         base.SetupHand();
 
         GameObject cardOne = transform.GetChild(0).gameObject;
@@ -18,7 +19,7 @@ public class JLZDealerHand : BlackJackHand
         cardOne.GetComponentsInChildren<Image>()[1].enabled = false;
 
         reveal = false;
-    }
+    }*/
 
     protected override void ShowValue()
     {
