@@ -123,6 +123,32 @@ public class Manager_CDLMod : OverManager
 		StayButton.SetActive(true);
     }
 
+    public void BalanceUpdate()
+    {
+        Balance += currentBet*2;
+    }
+
+    public void CDL_DealerBlackJack()
+    {
+        GameOverText("Dealer Black Jack!", Color.red);
+        if (HitButton.activeSelf == true)
+        {
+            HidePlayerButtons();
+        }
+        BetWindow.SetActive(false);
+    }
+
+    public void CDL_BlackJack()
+    {
+        GameOverText("Black Jack!", Color.green);
+        if (HitButton.activeSelf == true)
+        {
+            HidePlayerButtons();
+        }
+        BetWindow.SetActive(false);
+        BalanceUpdate();
+    }
+
     void OnApplicationQuit()
     {
         PlayerPrefs.DeleteAll();

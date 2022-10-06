@@ -8,9 +8,9 @@ public class Hand_CDLMod : BlackJackHand
         base.SetupHand();
 
 		if(GetHandValue() == 21){
-			BlackJackManager manager = Manager_CDLMod.FindInstance();
+			Manager_CDLMod manager = Manager_CDLMod.FindInstance();
 
-			manager.BlackJack();
+			manager.CDL_BlackJack();
 		}
     }
 }
