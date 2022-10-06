@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class NMBlackJackHand : BlackJackHand
 {
-    public NMBlackJackHand hitMe;
     public NMDealerHand dealerHand;
 
     public Button SwapButton;
@@ -113,11 +112,14 @@ public class NMBlackJackHand : BlackJackHand
                                 SwapCards(SelectedCard, result.gameObject);
                                 SelectedCard = null;
                                 SwapButton.interactable = false;
+                                SwapButton.image.color = Color.white;
                             }
                             else
                             {
-                                SelectedCard = null;
                                 Debug.Log("Illegal Swap, exit swap mode");
+                                SelectedCard = null;
+                                swapSelect = false;
+                                SwapButton.image.color = Color.white;
                             }
                         }
                         else
@@ -128,11 +130,14 @@ public class NMBlackJackHand : BlackJackHand
                                 SwapCards(result.gameObject,SelectedCard);
                                 SelectedCard = null;
                                 SwapButton.interactable = false;
+                                SwapButton.image.color = Color.white;
                             }
                             else
                             {
-                                SelectedCard = null;
                                 Debug.Log("Illegal Swap, exit swap mode");
+                                SelectedCard = null;
+                                swapSelect = false;
+                                SwapButton.image.color = Color.white;
                             }
                         }
                     }
@@ -143,7 +148,17 @@ public class NMBlackJackHand : BlackJackHand
 
     public void SwapMe()
     {
-        swapSelect = true;
+        if (swapSelect)
+        {
+            swapSelect = false;
+            SwapButton.image.color = Color.white;
+        }
+        else
+        {
+            swapSelect = true;
+            SwapButton.image.color = Color.green;
+        }
+        SelectedCard = null;
     }
 
     public void SwapCards(GameObject playersCard, GameObject dealersCard)
@@ -163,6 +178,8 @@ public class NMBlackJackHand : BlackJackHand
 
         originalPlayerIndex = playersCard.GetComponent<RectTransform>().GetSiblingIndex();
         originalDealerIndex = dealersCard.GetComponent<RectTransform>().GetSiblingIndex();
+        Debug.Log("originalPlayerIndex: " +originalPlayerIndex);
+        Debug.Log("originalDealerIndex: " +originalDealerIndex);
         
         //swap hand value
         tempCard = hand[playersCard.GetComponent<RectTransform>().GetSiblingIndex()];
@@ -182,7 +199,7 @@ public class NMBlackJackHand : BlackJackHand
         dealersCard.GetComponent<RectTransform>().parent = tempTransform;
         
         //swap playersCard and dealersCard child order
-        playersCard.GetComponent<RectTransform>().SetSiblingIndex(originalPlayerIndex);
-        dealersCard.GetComponent<RectTransform>().SetSiblingIndex(originalDealerIndex);
+        playersCard.GetComponent<RectTransform>().SetSiblingIndex(originalDealerIndex);
+        dealersCard.GetComponent<RectTransform>().SetSiblingIndex(originalPlayerIndex);
     }
 }

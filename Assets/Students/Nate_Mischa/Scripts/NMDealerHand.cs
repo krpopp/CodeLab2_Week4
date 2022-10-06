@@ -16,8 +16,10 @@ using UnityEngine.UI;
 
 public class NMDealerHand : DealerHand
 {
-	bool reveal;
+	bool newReveal;
 	public bool isSwapped;
+
+	public NMBlackJackHand blackJackHand;
 	
 	//Bug1: called when player bust
 	//Called when player bust, show dealer's hand and update text
@@ -39,7 +41,7 @@ public class NMDealerHand : DealerHand
 	{
 		if(hand.Count > 1)
 		{
-			if(!reveal)
+			if(!newReveal)
 			{
 				if (!isSwapped)
 				{
@@ -121,5 +123,27 @@ public class NMDealerHand : DealerHand
 		cardOne.GetComponentsInChildren<Image>()[1].enabled = true;
 
 		ShowCard(hand[0], cardOne, 0);
+	}
+	
+	public void NewRevealCard()
+	{
+		newReveal = true;
+		blackJackHand.SwapButton.interactable = false;
+		
+		if (isSwapped)
+		{
+			ShowValue();
+		}
+		else
+		{
+			GameObject cardOne = transform.GetChild(0).gameObject;
+
+			cardOne.GetComponentsInChildren<Image>()[0].sprite = null;
+			cardOne.GetComponentsInChildren<Image>()[1].enabled = true;
+
+			ShowCard(hand[0], cardOne, 0);
+
+			ShowValue();
+		}
 	}
 }
