@@ -41,29 +41,20 @@ public class Manager_CDLMod : OverManager
 			} 
 	}
     private float balance; //how much money we generally own
+    [SerializeField] string BalanceKey = "Balance";
     [HideInInspector] public float Balance   // the actual variable that we're accessing
 	{
 		get { 
-            return PlayerPrefs.GetFloat("Balance", defaultBalance);
+            return PlayerPrefs.GetFloat(BalanceKey, defaultBalance);
             }
-		set { 
-            if (PlayerPrefs.GetInt("balanceSet", 0) == 1)
-            {
-                string tempValue = balance.ToString();
-                balance = value;
-                string newValue = balanceText.text.Replace (tempValue, balance.ToString());
-			    balanceText.text = newValue; //we update it's visual text! when it's getting set! I'm so happy I remembered you can do that:)
-                PlayerPrefs.SetFloat("Balance", balance);
-
-            } else {
-                string firstTempValue = defaultBalance.ToString();
-                balance = value;
-                PlayerPrefs.SetInt("balanceSet", 1);
-                string newValue = balanceText.text.Replace (firstTempValue, balance.ToString());
-			    balanceText.text = newValue; //we update it's visual text! when it's getting set! I'm so happy I remembered you can do that:)
-                PlayerPrefs.SetFloat("Balance", balance);
-                }
-			} 
+        set
+        {
+            string tempValue = PlayerPrefs.GetFloat(BalanceKey, defaultBalance).ToString();
+            balance = value;
+            PlayerPrefs.SetFloat(BalanceKey, balance);
+            string newValue = balanceText.text.Replace (tempValue, balance.ToString());
+            balanceText.text = newValue; //we update it's visual text! when it's getting set! I'm so happy I remembered you can do that:)
+        }
 	}
 
     [Header("Player Settings")]
@@ -79,18 +70,20 @@ public class Manager_CDLMod : OverManager
 
     protected virtual void Start()
     {
-        string tempBalanceText = balanceText.text.Replace (replaceKey, PlayerPrefs.GetFloat("Balance", defaultBalance).ToString());
+        string tempBalanceText = balanceText.text.Replace (replaceKey, Balance.ToString());
         balanceText.text = tempBalanceText;
         string tempBetText = betText.text.Replace (replaceKey, "0");
         betText.text = tempBetText;
-        //Balance = defaultBalance;
+        currentBet = defaultBet;
+        string tempCurrentBetText = currentBetText.text.Replace (replaceKey, defaultBet.ToString());
+        currentBetText.text = tempCurrentBetText;
         FinalizedBet = 0;
     }
     public void BettingOn()
     {
         BetWindow.SetActive(true);
+        replaceKey = currentBet.ToString();
         currentBet = defaultBet;
-        replaceKey = defaultBet.ToString();
         UpdateValue();
     }
 
@@ -98,8 +91,10 @@ public class Manager_CDLMod : OverManager
     {
         if (currentBet < Balance) // if current bet is not larger than the amount of money we have 
         {
+            //Debug.Log("Current bet: " + currentBet);
+            //Debug.Log("Current balance: " + Balance);
+            replaceKey = currentBet.ToString();
             currentBet +=100;
-            Debug.Log(currentBet);
             UpdateValue();
         }
     }
@@ -108,6 +103,7 @@ public class Manager_CDLMod : OverManager
     {
         if (currentBet > 100)
         {
+            replaceKey = currentBet.ToString();
             currentBet -= 100;
             UpdateValue();
         }
@@ -116,15 +112,14 @@ public class Manager_CDLMod : OverManager
     void UpdateValue()
     {
         string newValue = currentBetText.text.Replace (replaceKey, currentBet.ToString());
-        replaceKey = currentBet.ToString();
         currentBetText.text = newValue;
+        Debug.Log(newValue);
     }
 
     public void Bet()
     {
         BetWindow.SetActive(false);
         Balance -= currentBet;
-        Debug.Log(Balance);
         FinalizedBet = currentBet;
     }
     void OnApplicationQuit()
