@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hand_CDLMod : MonoBehaviour
+public class Hand_CDLMod : BlackJackHand
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    protected override void SetupHand(){
+        base.SetupHand();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+		if(GetHandValue() == 21){
+			BlackJackManager manager = Manager_CDLMod.FindInstance();
+
+			manager.BlackJack();
+		}
     }
 }
