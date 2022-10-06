@@ -67,6 +67,8 @@ public class Manager_CDLMod : OverManager
     [SerializeField] TextMeshProUGUI currentBetText;
     [SerializeField] TextMeshProUGUI betText;
     [SerializeField] TextMeshProUGUI balanceText;
+    [SerializeField] GameObject HitButton;
+    [SerializeField] GameObject StayButton;
 
     protected virtual void Start()
     {
@@ -79,20 +81,11 @@ public class Manager_CDLMod : OverManager
         currentBetText.text = tempCurrentBetText;
         FinalizedBet = 0;
     }
-    public void BettingOn()
-    {
-        BetWindow.SetActive(true);
-        replaceKey = currentBet.ToString();
-        currentBet = defaultBet;
-        UpdateValue();
-    }
 
     public void Increase()
     {
         if (currentBet < Balance) // if current bet is not larger than the amount of money we have 
         {
-            //Debug.Log("Current bet: " + currentBet);
-            //Debug.Log("Current balance: " + Balance);
             replaceKey = currentBet.ToString();
             currentBet +=100;
             UpdateValue();
@@ -119,9 +112,17 @@ public class Manager_CDLMod : OverManager
     public void Bet()
     {
         BetWindow.SetActive(false);
+        ShowPlayerButtons();
         Balance -= currentBet;
         FinalizedBet = currentBet;
     }
+
+    void ShowPlayerButtons()
+    {
+        HitButton.SetActive(true);
+		StayButton.SetActive(true);
+    }
+
     void OnApplicationQuit()
     {
         PlayerPrefs.DeleteAll();

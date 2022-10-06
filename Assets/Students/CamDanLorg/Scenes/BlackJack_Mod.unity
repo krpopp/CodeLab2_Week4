@@ -570,7 +570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &427493489
 Transform:
   m_ObjectHideFlags: 0
@@ -579,8 +579,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 427493488}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 95.18331, y: 66.1, z: 1.3741769}
-  m_LocalScale: {x: 0.72661215, y: 0.72661215, z: 0.72661215}
+  m_LocalPosition: {x: 72.8, y: 44.7, z: 1.3741769}
+  m_LocalScale: {x: 0.5789065, y: 0.5789065, z: 0.5789065}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1912987500}
@@ -1217,7 +1217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &873982212
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1351,7 +1351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &925610032
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1932,13 +1932,16 @@ MonoBehaviour:
   statusText: {fileID: 195439677}
   tryAgain: {fileID: 1450806461}
   loadScene: BlackJack_Mod
+  BalanceKey: Balance
   defaultBet: 100
-  defaultBalance: 700
+  defaultBalance: 800
   BetWindow: {fileID: 427493488}
   replaceKey: <value>
   currentBetText: {fileID: 1197283148}
   betText: {fileID: 679672622}
   balanceText: {fileID: 2050582343}
+  HitButton: {fileID: 873982211}
+  StayButton: {fileID: 925610031}
 --- !u!1 &1622242455
 GameObject:
   m_ObjectHideFlags: 0
@@ -2385,7 +2388,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -116.1, y: -33.1}
+  m_AnchoredPosition: {x: -116.1, y: -24}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1912987501
