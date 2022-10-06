@@ -8,6 +8,9 @@ public class AJT_BlackJackHand : BlackJackHand {
     //public accessor for hands
     public List<DeckOfCards.Card> Hand { get { return hand; } set { hand = value;} }
 
+    //bool for enhanced card buffering
+    public bool choosing;
+
     //BUG FIX
     //removes the remaining cards from the previous round and sets up new hands
 	public virtual void ResetHand() {
@@ -42,19 +45,28 @@ public class AJT_BlackJackHand : BlackJackHand {
         if (card is AJT_Card)
         {
             AJT_Card enhancedCard = card as AJT_Card;
-            if (hand.Count > 2) {     
-            enhancedCard.TriggerEnhancedCard();
+            if (hand.Count > 2) {
+                choosing = true;
+                enhancedCard.TriggerEnhancedCard();
+                StartCoroutine(EnhanceBuffer());
             } else {
                 enhancedCard.usingValue = true;
+                ShowValue();
             }
         }
-
-		ShowValue(); //Update scene UI to display hand total	
+        else
+    		ShowValue(); //Update scene UI to display hand total	
 	}
+    //Coroutine to delay the call to add up the hand total, preventing bust or blackjack while choosing enhanced effect
+    protected virtual IEnumerator EnhanceBuffer() { 
+        while (choosing) {
+            yield return new WaitForEndOfFrame();
+        }
+        ShowValue();
+    }
 
     //Function to update scene UI for individual card instances 
-    new public void ShowCard(DeckOfCards.Card card, GameObject cardObj, int pos)
-    {
+    new public void ShowCard(DeckOfCards.Card card, GameObject cardObj, int pos) {
         cardObj.name = card.ToString(); //Name the gameobject in the hierarchy
 
         cardObj.transform.SetParent(handBase.transform); //Assign parent
@@ -68,9 +80,10 @@ public class AJT_BlackJackHand : BlackJackHand {
 
     //BUG FIX
     //overidden to check for natural Black Jack
-    protected override void ShowValue()
-    {
-        base.ShowValue();
+    protected override void ShowValue() {
+        handVals = GetHandValue();
+
+        total.text = "Player: " + handVals;
 
         //check for blackjack
         if (handVals == 21) { 
@@ -81,14 +94,14 @@ public class AJT_BlackJackHand : BlackJackHand {
             //Automatically stay if the player has 21
             else
                 GameObject.Find("Game Manager").GetComponent<AJT_BlackJackManager>().PlayerStays();
+        //check for bust
+        } else if (handVals > 21) {
+            GameObject.Find("Game Manager").GetComponent<AJT_BlackJackManager>().PlayerBusted();          
         }
     }
 
-    public void GetValue()
-    {
+    //public accessor for private base function
+    public void GetValue() {
         ShowValue();
     }
-
-
-
 }

@@ -46,16 +46,15 @@ public class AJT_DeckOfCards : DeckOfCards {
             foreach (Card.Suit suit in Card.Suit.GetValues(typeof(Card.Suit))){
                 foreach (Card.Type type in Card.Type.GetValues(typeof(Card.Type))){
                     //BUGFIX BUGFIX; skip duplicate cards in reshuffle -- still troubleshooting
-                    //add card if it isn't already in a hand
+                    //remove card from cardsToSkip if it contains a card w/ suit and number
                     if (cardsToSkip.Find(c => c.cardNum == type && c.suit == suit) != null) {
                         cardsToSkip.Remove(cardsToSkip.Find(c => c.cardNum == type && c.suit == suit));
                         //Debug.Log("Removed the " + type + " of " + suit);
                     }
-                    //else remove that card from cardsToSkip
+                    //add card if it isn't already in a hand
                     else {
-                        switch ((int)type)
-                        {
-
+                        //add enhanced cards based on number, default normal cards
+                        switch ((int)type) {
                             case 2:
                                 // deck.Add(new AJT_SubtractCard(type, suit));
                                 break;

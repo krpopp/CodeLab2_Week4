@@ -20,17 +20,15 @@ public class AJT_AddCard : AJT_Card
 
     public override void ActionOne()
     {
-        choosing = false;
-
         playerHand.Hand.Remove(playerHand.Hand[playerHand.Hand.Count - 1]);
-        blackJackManager.DestroyCard(playerHand.handBase.transform.GetChild(playerHand.handBase.transform.childCount - 1).gameObject);
+        manager.DestroyCard(playerHand.handBase.transform.GetChild(playerHand.handBase.transform.childCount - 1).gameObject);
         playerHand.GetValue();
 
 
         dealerHand.Hand.Add(this);
         dealerHand.GetValue();
 
-        GameObject cardObj = blackJackManager.CreateCard();
+        GameObject cardObj = manager.CreateCard();
         dealerHand.ShowCard(dealerHand.Hand[dealerHand.Hand.Count - 1], cardObj, 0);
 
 
