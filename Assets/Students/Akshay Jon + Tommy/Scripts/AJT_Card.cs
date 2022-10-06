@@ -56,7 +56,6 @@ public class AJT_Card : DeckOfCards.Card {
 
 	public virtual int GetCardEnhancedValue() {
 		int val = 0;
-		Debug.Log("Enhanced");
 
 		return val;
 	}

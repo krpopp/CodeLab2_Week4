@@ -47,7 +47,7 @@ public class AJT_DealerHand : AJT_BlackJackHand {
 					manager.DealerBusted();
 					//draws new card for dealer if dealer is under 17
 				} else if(!DealStay(handVals)){
-					Hit();
+					Invoke("Hit", 1);
 				} else {
 					// once dealer stays, compares dealer and player hand values
 					BlackJackHand playerHand = GameObject.Find("Player Hand").GetComponent<BlackJackHand>();

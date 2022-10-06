@@ -14,10 +14,9 @@ public class AJT_SwapCard : AJT_Card
 
     public override void TriggerEnhancedCard()
     {
-        GameObject.Find("Game Manager").GetComponent<AJT_BlackJackManager>().ShowActionButtonOne(this, "SWAP");
-
         base.TriggerEnhancedCard();
 
+        GameObject.Find("Game Manager").GetComponent<AJT_BlackJackManager>().ShowActionButtonOne(this, "SWAP");
     }
 
     public override int GetCardEnhancedValue()
@@ -35,7 +34,7 @@ public class AJT_SwapCard : AJT_Card
         AJT_BlackJackHand playerHand = GameObject.Find("Player Hand").GetComponent<AJT_BlackJackHand>();
         DeckOfCards.Card dealerCard = dealerHand.Hand[1];
 
-        playerHand.Hand.Remove(this);
+        playerHand.Hand.Remove(playerHand.Hand[playerHand.Hand.Count - 1]);
         playerHand.Hand.Add(dealerCard);
         playerHand.GetValue();
 
