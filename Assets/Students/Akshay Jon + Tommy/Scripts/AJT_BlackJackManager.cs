@@ -7,7 +7,7 @@ public class AJT_BlackJackManager : BlackJackManager
 {
     //BUG FIX
     //references to access inactive game objects
-	[SerializeField] GameObject hitButton, stayButton, valueButton, actionButtonOne;
+	[SerializeField] GameObject hitButton, stayButton, valueButton, actionButtonOne, actionButtonTwo;
 
 
 	//function to return the total from the cards in hand
@@ -94,5 +94,19 @@ public class AJT_BlackJackManager : BlackJackManager
 
 		Button b = actionButtonOne.GetComponent<Button>();
 		b.onClick.AddListener(delegate(){card.ActionOne();});
+	}
+
+    public void ShowActionButtonTwo(AJT_Card card, string action)
+    {
+        actionButtonTwo.SetActive(true);
+        actionButtonTwo.GetComponentInChildren<Text>().text = action;
+
+        Button b = actionButtonTwo.GetComponent<Button>();
+        b.onClick.AddListener(delegate () { card.ActionTwo(); });
+    }
+
+	public void DestroyCard(GameObject go)
+	{
+		DestroyImmediate(go);
 	}
 }

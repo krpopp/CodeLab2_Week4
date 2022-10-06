@@ -30,18 +30,15 @@ public class AJT_SwapCard : AJT_Card
     {
         choosing = false;
 
-        AJT_BlackJackHand dealerHand = GameObject.Find("Dealer Hand").GetComponent<AJT_DealerHand>();
-        AJT_BlackJackHand playerHand = GameObject.Find("Player Hand").GetComponent<AJT_BlackJackHand>();
-        DeckOfCards.Card dealerCard = dealerHand.Hand[1];
 
         playerHand.Hand.Remove(playerHand.Hand[playerHand.Hand.Count - 1]);
         playerHand.Hand.Add(dealerCard);
         playerHand.GetValue();
 
-        dealerHand.Hand[1] = this;
+        dealerHand.Hand[dealerHand.Hand.Count - 1] = this;
         dealerHand.GetValue();
 
-        dealerHand.ShowCard(dealerHand.Hand[1], dealerHand.handBase.transform.GetChild(1).gameObject, 0);
+        dealerHand.ShowCard(dealerHand.Hand[dealerHand.Hand.Count -1], dealerHand.handBase.transform.GetChild(1).gameObject, 0);
         playerHand.ShowCard(playerHand.Hand[playerHand.Hand.Count - 1], playerHand.cardObj, 0);
 
         usingValue = true;

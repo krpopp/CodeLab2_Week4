@@ -55,15 +55,17 @@ public class AJT_DeckOfCards : DeckOfCards {
                     else {
                         switch ((int)type)
                         {
+
+                            case 2:
+                                // deck.Add(new AJT_SubtractCard(type, suit));
+                                break;
                             case 3:
                                 deck.Add(new AJT_SwapCard(type, suit));
                                 break;
+                            case 4:
+                                deck.Add(new AJT_AddCard(type, suit));
+                                break;
                             case 5:
-                                break;
-                            case 7:
-                                //deck.Add(new AJT_CopyCard(type, suit));
-                                break;
-                            case 9:
                                 break;
                             default:
                                 deck.Add(new Card(type, suit));
