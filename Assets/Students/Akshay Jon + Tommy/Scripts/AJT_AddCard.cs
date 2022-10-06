@@ -30,8 +30,9 @@ public class AJT_AddCard : AJT_Card
         dealerHand.Hand.Add(this);
         dealerHand.GetValue();
 
-        dealerHand.ShowCard(dealerHand.Hand[dealerHand.Hand.Count - 1], dealerHand.handBase.transform.GetChild(1).gameObject, 0);
-        
+        GameObject cardObj = blackJackManager.CreateCard();
+        dealerHand.ShowCard(dealerHand.Hand[dealerHand.Hand.Count - 1], cardObj, 0);
+
 
         usingValue = true;
     }

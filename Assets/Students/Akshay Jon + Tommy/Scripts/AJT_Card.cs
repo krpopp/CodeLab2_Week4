@@ -8,9 +8,9 @@ public class AJT_Card : DeckOfCards.Card {
 	public bool choosing;
 	public bool usingValue = false;
 	protected AJT_BlackJackManager blackJackManager = GameObject.FindObjectOfType<AJT_BlackJackManager>();
-	protected AJT_BlackJackHand dealerHand = GameObject.Find("Dealer Hand").GetComponent<AJT_DealerHand>();
-    protected AJT_BlackJackHand playerHand = GameObject.Find("Player Hand").GetComponent<AJT_BlackJackHand>();
-    protected DeckOfCards.Card dealerCard;
+	protected AJT_DealerHand dealerHand = GameObject.FindObjectOfType<AJT_DealerHand>();
+    protected AJT_BlackJackHand playerHand = GameObject.FindObjectOfType<AJT_BlackJackHand>();
+    protected AJT_Card dealerCard;
 
     public AJT_Card(Type cardNum, Suit suit) : base(cardNum, suit)
 	{       //constructor to declare a variable of type Card

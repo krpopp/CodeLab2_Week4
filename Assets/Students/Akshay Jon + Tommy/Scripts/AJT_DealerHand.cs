@@ -28,39 +28,37 @@ public class AJT_DealerHand : AJT_BlackJackHand {
 	//Overriden to make behavior different than players
     protected override void ShowValue(){
 		if(hand.Count > 1){
-			//shows value of dealer's revealed cards only
-			if(!reveal){
-				//sets handVals to value of revealed card
-				handVals = hand[1].GetCardHighValue();
+			//shows value of all dealer cards
+			handVals = GetHandValue();			
 
-				total.text = "Dealer: " + handVals + " + ???";
-			} else {
-				//shows value of all dealer cards
-				handVals = GetHandValue();
+			BlackJackManager manager = GameObject.Find("Game Manager").GetComponent<BlackJackManager>();
 
-				total.text = "Dealer: " + handVals;
+			//handles dealer bust
+			if(handVals > 21){
+				manager.DealerBusted();
+				//draws new card for dealer if dealer is under 17
+			} else if(!DealStay(handVals) && reveal){
+				Invoke("Hit", 1);
+			} else if (reveal) {
+				// once dealer stays, compares dealer and player hand values
+				BlackJackHand playerHand = GameObject.Find("Player Hand").GetComponent<BlackJackHand>();
 
-				BlackJackManager manager = GameObject.Find("Game Manager").GetComponent<BlackJackManager>();
-
-				//handles dealer bust
-				if(handVals > 21){
-					manager.DealerBusted();
-					//draws new card for dealer if dealer is under 17
-				} else if(!DealStay(handVals)){
-					Invoke("Hit", 1);
+				if(handVals < playerHand.handVals){
+					//player wins if player has higher total than dealer
+					manager.PlayerWin();
 				} else {
-					// once dealer stays, compares dealer and player hand values
-					BlackJackHand playerHand = GameObject.Find("Player Hand").GetComponent<BlackJackHand>();
-
-					if(handVals < playerHand.handVals){
-						//player wins if player has higher total than dealer
-						manager.PlayerWin();
-					} else {
-						//player loses in case of tie or higher dealer hand
-						manager.PlayerLose();
-					}
+					//player loses in case of tie or higher dealer hand
+					manager.PlayerLose();
 				}
 			}
+
+			if(!reveal) {
+				//sets handVals to value of revealed card
+				handVals -= hand[0].GetCardHighValue();
+
+				total.text = "Dealer: ??? + " + handVals;
+            } else
+				total.text = "Dealer: " + handVals;
 		}
 	}
 
@@ -93,6 +91,10 @@ public class AJT_DealerHand : AJT_BlackJackHand {
         ShowCard(card, cardObj, hand.Count); //Update scene UI to display card correctly 
 
         hand.Add(card); //Store card in local hand list
+		 if (card is AJT_Card) {
+            AJT_Card enhancedCard = card as AJT_Card;
+			enhancedCard.usingValue = true;          
+		 }
 
         ShowValue(); //Update scene UI to display hand total	
 	}

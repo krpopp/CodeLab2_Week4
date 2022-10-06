@@ -29,18 +29,28 @@ public class AJT_SwapCard : AJT_Card
     public override void ActionOne()
     {
         choosing = false;
+        dealerCard = dealerHand.Hand[dealerHand.Hand.Count - 1] as AJT_Card;
 
-
-        playerHand.Hand.Remove(playerHand.Hand[playerHand.Hand.Count - 1]);
+        blackJackManager.DestroyCard(playerHand.handBase.transform.GetChild(playerHand.handBase.transform.childCount - 1).gameObject);
+        playerHand.Hand.RemoveAt(playerHand.Hand.Count - 1);
         playerHand.Hand.Add(dealerCard);
-        playerHand.GetValue();
-
-        dealerHand.Hand[dealerHand.Hand.Count - 1] = this;
+        //playerHand.Hand[playerHand.Hand.Count - 1] = dealerCard;
+        GameObject newCard1 = blackJackManager.CreateCard();
+        //Debug.Log(playerHand.Hand.Count);
+        //Debug.Log(playerHand.Hand[playerHand.Hand.Count - 1].suit);
+        //Debug.Log(playerHand.Hand[playerHand.Hand.Count - 1] != null);
+        playerHand.ShowCard(playerHand.Hand[playerHand.Hand.Count - 1], newCard1, 0);                
+        playerHand.GetValue();      
+        
+        dealerHand.Hand.RemoveAt(dealerHand.Hand.Count - 1);
+        blackJackManager.DestroyCard(dealerHand.handBase.transform.GetChild(dealerHand.handBase.transform.childCount - 1).gameObject);
+        GameObject newCard2 = blackJackManager.CreateCard();
+        dealerHand.Hand.Add(this);
+        dealerHand.ShowCard(this, newCard2, 0);
         dealerHand.GetValue();
 
-        dealerHand.ShowCard(dealerHand.Hand[dealerHand.Hand.Count -1], dealerHand.handBase.transform.GetChild(1).gameObject, 0);
-        playerHand.ShowCard(playerHand.Hand[playerHand.Hand.Count - 1], playerHand.cardObj, 0);
 
+        dealerCard = null;
         usingValue = true;
     }
 }

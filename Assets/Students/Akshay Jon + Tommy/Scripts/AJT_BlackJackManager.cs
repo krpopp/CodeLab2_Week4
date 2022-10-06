@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class AJT_BlackJackManager : BlackJackManager
 {
+	AJT_DeckOfCards deck;
+
     //BUG FIX
     //references to access inactive game objects
 	[SerializeField] GameObject hitButton, stayButton, valueButton, actionButtonOne, actionButtonTwo;
+
+	protected virtual void Start() {
+		deck = GameObject.Find("Deck").GetComponent<AJT_DeckOfCards>();
+	}
 
 
 	//function to return the total from the cards in hand
@@ -16,12 +23,14 @@ public class AJT_BlackJackManager : BlackJackManager
 
 		//Get highest possible total of hand
 		foreach(DeckOfCards.Card handCard in hand){
-			if (!(handCard is AJT_Card))
-				handValue += handCard.GetCardHighValue();
-			else
-			{
-				AJT_Card c = handCard as AJT_Card;
-				handValue += c.GetCardValue();
+			if (handCard != null) { 
+				if (!(handCard is AJT_Card))
+					handValue += handCard.GetCardHighValue();
+				else
+				{
+					AJT_Card c = handCard as AJT_Card;
+					handValue += c.GetCardValue();
+				}
 			}
 		}
         //BUG FIX
@@ -93,6 +102,7 @@ public class AJT_BlackJackManager : BlackJackManager
 		actionButtonOne.GetComponentInChildren<Text>().text = action;
 
 		Button b = actionButtonOne.GetComponent<Button>();
+		b.onClick.RemoveAllListeners();
 		b.onClick.AddListener(delegate(){card.ActionOne();});
 	}
 
@@ -102,11 +112,17 @@ public class AJT_BlackJackManager : BlackJackManager
         actionButtonTwo.GetComponentInChildren<Text>().text = action;
 
         Button b = actionButtonTwo.GetComponent<Button>();
+		b.onClick.RemoveAllListeners();
         b.onClick.AddListener(delegate () { card.ActionTwo(); });
     }
 
 	public void DestroyCard(GameObject go)
 	{
 		DestroyImmediate(go);
+	}
+
+	public GameObject CreateCard() {
+		GameObject newCard = Instantiate(deck.GetComponent<AJT_DeckOfCards>().cardPrefab);
+		return newCard;
 	}
 }

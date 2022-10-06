@@ -8,8 +8,6 @@ public class AJT_BlackJackHand : BlackJackHand {
     //public accessor for hands
     public List<DeckOfCards.Card> Hand { get { return hand; } set { hand = value;} }
 
-    public GameObject cardObj;
-
     //BUG FIX
     //removes the remaining cards from the previous round and sets up new hands
 	public virtual void ResetHand() {
@@ -35,7 +33,7 @@ public class AJT_BlackJackHand : BlackJackHand {
 
 		DeckOfCards.Card card = deck.DrawCard(); //Store card from top of deck
 
-        cardObj = Instantiate(deck.GetComponent<AJT_DeckOfCards>().cardPrefab); //Instantiate prefab as that card
+        GameObject cardObj = Instantiate(deck.GetComponent<AJT_DeckOfCards>().cardPrefab); //Instantiate prefab as that card
 
         ShowCard(card, cardObj, hand.Count); //Update scene UI to display card correctly 
 
