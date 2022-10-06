@@ -12,10 +12,10 @@ public class AJT_SwapCard : AJT_Card
         this.suit = suit;
     }
 
-    public override IEnumerator TriggerEnhancedCard()
+    public override void TriggerEnhancedCard()
     {
-        yield return null;
         GameObject.Find("Game Manager").GetComponent<AJT_BlackJackManager>().ShowActionButtonOne(this, "SWAP");
+
         base.TriggerEnhancedCard();
 
     }

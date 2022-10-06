@@ -77,6 +77,7 @@ public class AJT_BlackJackManager : BlackJackManager
     //Wrapped multiple button calls into one function that can be used to auto stay
     public void PlayerStays() {
         GameObject.Find("Dealer Hand").GetComponent<AJT_DealerHand>().RevealDealer();
+		HidePlayerButtons();
     }
 
 	public void ShowValueButton(AJT_Card card)

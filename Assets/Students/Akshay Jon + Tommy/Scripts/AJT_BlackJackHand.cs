@@ -26,20 +26,12 @@ public class AJT_BlackJackHand : BlackJackHand {
         deck = GameObject.Find("Deck").GetComponent<DeckOfCards>();
         hand = new List<DeckOfCards.Card>();
         //Add two cards to player hand
-        StartCoroutine(InitialDraw());
-    }
-
-    IEnumerator InitialDraw() {
-        yield return StartCoroutine(Hit());
-        yield return StartCoroutine(Hit());
-    }
-
-    public void HitButton() {
-        StartCoroutine(Hit());
+        Hit();
+        Hit();
     }
 
     //Function to add card to player hand, calls all other functions in this class
-	public virtual IEnumerator Hit(){
+	public virtual void Hit(){
 
 		DeckOfCards.Card card = deck.DrawCard(); //Store card from top of deck
 
@@ -52,8 +44,11 @@ public class AJT_BlackJackHand : BlackJackHand {
         if (card is AJT_Card)
         {
             AJT_Card enhancedCard = card as AJT_Card;
+            if (hand.Count > 2) {     
             enhancedCard.TriggerEnhancedCard();
-            yield return StartCoroutine(enhancedCard.TriggerEnhancedCard());
+            } else {
+                enhancedCard.usingValue = true;
+            }
         }
 
 		ShowValue(); //Update scene UI to display hand total	
