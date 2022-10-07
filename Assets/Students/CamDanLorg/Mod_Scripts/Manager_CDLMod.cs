@@ -71,6 +71,7 @@ public class Manager_CDLMod : OverManager
     [SerializeField] GameObject StayButton;
 
     protected virtual void Start()
+        //set up the bet value and text for balance to display
     {
         string tempBalanceText = balanceText.text.Replace (replaceKey, Balance.ToString());
         balanceText.text = tempBalanceText;
@@ -82,9 +83,10 @@ public class Manager_CDLMod : OverManager
         FinalizedBet = 0;
     }
 
+    //if the current bet is less than the balance player has, add the bet.
     public void Increase()
     {
-        if (currentBet < Balance) // if current bet is not larger than the amount of money we have 
+        if (currentBet < Balance) 
         {
             replaceKey = currentBet.ToString();
             currentBet +=100;
@@ -92,6 +94,7 @@ public class Manager_CDLMod : OverManager
         }
     }
     
+    //if the bet is more than 100, plaer can decrease the bet
     public void Decrease()
     {
         if (currentBet > 100)
@@ -102,6 +105,7 @@ public class Manager_CDLMod : OverManager
         }
     }
 
+    //update the bet everytime it changed, both increase and decrease
     void UpdateValue()
     {
         string newValue = currentBetText.text.Replace (replaceKey, currentBet.ToString());
@@ -109,6 +113,7 @@ public class Manager_CDLMod : OverManager
         Debug.Log(newValue);
     }
 
+    //set up the ui for bet and calculate the blalance 
     public void Bet()
     {
         BetWindow.SetActive(false);
@@ -117,17 +122,21 @@ public class Manager_CDLMod : OverManager
         FinalizedBet = currentBet;
     }
 
+    //set up the button ui for player
     void ShowPlayerButtons()
     {
         HitButton.SetActive(true);
 		StayButton.SetActive(true);
     }
 
+    //call when player wins the bet, increase the balance according to the bet.
     public void BalanceUpdate()
     {
         Balance += currentBet*2;
     }
 
+
+    //set up the game ui when dealer has a blackjack
     public void CDL_DealerBlackJack()
     {
         GameOverText("Dealer Black Jack!", Color.red);
@@ -138,6 +147,8 @@ public class Manager_CDLMod : OverManager
         BetWindow.SetActive(false);
     }
 
+
+    //set up the game ui when player has a blackjack
     public void CDL_BlackJack()
     {
         GameOverText("Black Jack!", Color.green);
