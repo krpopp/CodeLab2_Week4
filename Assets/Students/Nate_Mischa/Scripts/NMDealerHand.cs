@@ -16,7 +16,9 @@ using UnityEngine.UI;
 
 public class NMDealerHand : DealerHand
 {
+	// the replacement of the private 'reveal'
 	bool newReveal;
+	// if the face down card is swapped
 	public bool isSwapped;
 
 	public NMBlackJackHand blackJackHand;
@@ -41,22 +43,26 @@ public class NMDealerHand : DealerHand
 	{
 		if(hand.Count > 1)
 		{
+			// check if the player is not 'stay'
 			if(!newReveal)
 			{
+				//check if the face down card is not swapped
 				if (!isSwapped)
 				{
+					//there is no change for the value
 					handVals = hand[1].GetCardHighValue();
 
 					total.text = "Dealer: " + handVals + " + ???";
 				}
 				else
 				{
+					//if the face down card is swapped, update the text with newly revealed card. 
 					handVals = GetHandValue();
 			
 					total.text = "Dealer: " + handVals;
 				}
 			} 
-			else 
+			else //if the player stay
 			{
 				handVals = GetHandValue();
 
@@ -64,16 +70,21 @@ public class NMDealerHand : DealerHand
 
 				BlackJackManager manager = GameObject.Find("Game Manager").GetComponent<BlackJackManager>();
 
+				//check if the dealer bust
 				if(handVals > 21)
 				{
 					manager.DealerBusted();
 				} 
+				//check if dealer's hand values is less than 17
 				else if(!DealStay(handVals))
 				{
+					//if it is, automatically draw a card
 					Invoke("HitMe", 1);
 				} 
+				//if dealer's hand values is greater than 17 and dealer is not bust
 				else 
 				{
+					//compare hand value with player's
 					BlackJackHand playerHand = GameObject.Find("Player Hand Value").GetComponent<BlackJackHand>();
 					
 					if(handVals < playerHand.handVals)
@@ -94,27 +105,20 @@ public class NMDealerHand : DealerHand
 		}
 	}
 	
-	public void ReSetUpHand()
-	{
-		for (int i = 0; i < hand.Count; i++) //check all card obj in hand
-		{
-			Destroy(handBase.transform.GetChild(i).gameObject); //destroy card instance
-		}
-		hand.Clear(); //clear hand
-		SetupHand(); //reset hand
-	}
-
+	//use this function to set access of dealer hand List from BlackJackHand scripts
 	public void SetDealerHandValue(int cardIndex,DeckOfCards.Card newCard)
 	{
 		hand[cardIndex] = newCard;
 		ShowValue();
 	}
 
+	//use this function to get access of dealer hand List from BlackJackHand scripts
 	public DeckOfCards.Card GetDealerHandVale(int cardIndex)
 	{
 		return hand[cardIndex];
 	}
 
+	//called when player swap the face down card and reveal it
 	public void RevealCardWhenSwap()
 	{
 		GameObject cardOne = transform.GetChild(0).gameObject;
@@ -125,13 +129,17 @@ public class NMDealerHand : DealerHand
 		ShowCard(hand[0], cardOne, 0);
 	}
 	
+	//replacement for 'RevealCard' function
 	public void NewRevealCard()
 	{
 		newReveal = true;
+		//when player click stay button, deactivate the swap button
 		blackJackHand.SwapButton.interactable = false;
 		
+		// check if the face down card is already swapped
 		if (isSwapped)
 		{
+			//if it is, directly showValue
 			ShowValue();
 		}
 		else
