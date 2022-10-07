@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class AJT_BlackJackManager : BlackJackManager
 {
 	AJT_DeckOfCards deck;
+	AJT_DealerHand dealerHand;
+	AJT_BlackJackHand playerHand;
 
     //BUG FIX
     //references to access inactive game objects
@@ -14,6 +16,8 @@ public class AJT_BlackJackManager : BlackJackManager
 
 	protected virtual void Start() {
 		deck = GameObject.Find("Deck").GetComponent<AJT_DeckOfCards>();
+		dealerHand = GameObject.Find("Dealer Hand").GetComponent<AJT_DealerHand>();
+		playerHand = GameObject.Find("Player Hand").GetComponent<AJT_BlackJackHand>();
 	}
 
 
@@ -49,8 +53,8 @@ public class AJT_BlackJackManager : BlackJackManager
     //resets scene to preserve deck contents
 	public void ResetScene() {
 		ShowPlayerButtons();
-		GameObject.Find("Player Hand").GetComponent<AJT_BlackJackHand>().ResetHand();
-		GameObject.Find("Dealer Hand").GetComponent<AJT_DealerHand>().ResetHand();
+		playerHand.ResetHand();
+		dealerHand.ResetHand();
 	}
 
     //Function to reset buttons in the scene
@@ -79,13 +83,22 @@ public class AJT_BlackJackManager : BlackJackManager
     }
 
     new public void PlayerBusted(){
-		GameOverText("YOU BUST", Color.red);
+		GameOverText("YOU" + '\n' + "BUST", Color.red);
 		HideAllButtons();
     }
 
+	new public void DealerBusted() {
+		GameOverText("DEALER BUSTS" + '\n' + "YOU WIN", Color.green);
+		if (!dealerHand.reveal) { 
+			dealerHand.reveal = true;
+			dealerHand.RevealCard();
+		}
+		HideAllButtons();
+	}
+
     //Wrapped multiple button calls into one function that can be used to auto stay
     public void PlayerStays() {
-        GameObject.Find("Dealer Hand").GetComponent<AJT_DealerHand>().RevealDealer();
+        dealerHand.RevealDealer();
 		HideAllButtons();
     }
 
@@ -120,8 +133,8 @@ public class AJT_BlackJackManager : BlackJackManager
 		b.onClick.AddListener(delegate () { card.ActionTwo(); }); //Add delegate void
 	}
 
-	public void DestroyCard(GameObject go)
-	{
+	//Functions for abstract Card classes to create and destroy cards
+	public void DestroyCard(GameObject go) {
 		DestroyImmediate(go);
 	}
 
@@ -130,11 +143,12 @@ public class AJT_BlackJackManager : BlackJackManager
 		return newCard;
 	}
 
+	//Display the function of the enhanced to the player
 	public void EnhancedCardTooltip(int index) {
 		statusText.color = Color.white;
 		switch (index) {
 			case 2:
-				statusText.text = "DECREASE YOUR TOTAL" + '\n' + "OR" + '\n' + "USE VALUE";
+				statusText.text = "USE NEGATIVE VALUE" + '\n' + "OR" + '\n' + "USE VALUE";
 				break;
 			case 3:
 				statusText.text = "SWAP WITH DEALER" + '\n' + "OR" + '\n' + "USE VALUE";

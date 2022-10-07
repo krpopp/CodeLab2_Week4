@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class AJT_DealerHand : AJT_BlackJackHand {
 
 	public Sprite cardBack;
-	bool reveal = false;
+	public bool reveal = false;
 
 	protected override void SetupHand(){
 		//this bool must be false before base.SetupHand to stop dealer from calling HitMe on the first frame of the next round
@@ -31,7 +31,7 @@ public class AJT_DealerHand : AJT_BlackJackHand {
 			//shows value of all dealer cards
 			handVals = GetHandValue();			
 
-			BlackJackManager manager = GameObject.Find("Game Manager").GetComponent<BlackJackManager>();
+			AJT_BlackJackManager manager = GameObject.Find("Game Manager").GetComponent<AJT_BlackJackManager>();
 
 			//handles dealer bust
 			if(handVals > 21){
@@ -41,7 +41,7 @@ public class AJT_DealerHand : AJT_BlackJackHand {
 				Invoke("Hit", 1);
 			} else if (reveal) {
 				// once dealer stays, compares dealer and player hand values
-				BlackJackHand playerHand = GameObject.Find("Player Hand").GetComponent<BlackJackHand>();
+				AJT_BlackJackHand playerHand = GameObject.Find("Player Hand").GetComponent<AJT_BlackJackHand>();
 
 				if(handVals < playerHand.handVals){
 					//player wins if player has higher total than dealer
@@ -52,14 +52,18 @@ public class AJT_DealerHand : AJT_BlackJackHand {
 				}
 			}
 
-			if(!reveal) {
+			RevealCard();
+		}
+	}
+
+	public virtual void RevealCard() { 
+		if(!reveal) {
 				//sets handVals to value of revealed card
 				handVals -= hand[0].GetCardHighValue();
 
 				total.text = "Dealer: ??? + " + handVals;
             } else
 				total.text = "Dealer: " + handVals;
-		}
 	}
 
 	protected virtual bool DealStay(int handVal) {

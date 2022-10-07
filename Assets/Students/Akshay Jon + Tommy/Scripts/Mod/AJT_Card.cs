@@ -7,8 +7,6 @@ using UnityEngine;
 
 public class AJT_Card : DeckOfCards.Card {
 
-
-	public bool choosing;
 	public bool usingValue = true;
 	protected AJT_BlackJackManager manager = GameObject.FindObjectOfType<AJT_BlackJackManager>();
 	protected AJT_DealerHand dealerHand = GameObject.FindObjectOfType<AJT_DealerHand>();
@@ -61,20 +59,19 @@ public class AJT_Card : DeckOfCards.Card {
 		manager.EnhancedCardTooltip(GetCardValue());
 	}
 
-
-
-
-	public virtual void UseValue()
-	{
+	//override voids for enhanced card inherited functionality
+	public virtual void UseValue() {
 		usingValue = true;
 		playerHand.choosing = false;
 	}
 
+	//called from the action button if the player chooses the enhanced option
 	public virtual void ActionOne()	{
 		usingValue = false;
 		playerHand.choosing = false;
 	}
 
+	//called from the action button if the player chooses the enhanced option
 	public virtual void ActionTwo()	{
 		usingValue = false;
 		playerHand.choosing = false;

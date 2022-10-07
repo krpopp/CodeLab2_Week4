@@ -42,18 +42,20 @@ public class AJT_BlackJackHand : BlackJackHand {
 
         hand.Add(card); //Store card in local hand list
 
-        if (card is AJT_Card)
-        {
+        //check if this is an enhanced card, if it is, delay showing total
+        if (card is AJT_Card) {
             AJT_Card enhancedCard = card as AJT_Card;
+            //ignore the first two cards
             if (hand.Count > 2) {
                 choosing = true;
                 enhancedCard.TriggerEnhancedCard();
-                StartCoroutine(EnhanceBuffer());
+                StartCoroutine(EnhanceBuffer()); //delay show total until decision is made
             } else {
                 enhancedCard.usingValue = true;
                 ShowValue();
             }
         }
+        //otherwise use default value and show hand total
         else
     		ShowValue(); //Update scene UI to display hand total	
 	}

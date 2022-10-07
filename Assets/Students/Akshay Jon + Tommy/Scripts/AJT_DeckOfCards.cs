@@ -47,16 +47,16 @@ public class AJT_DeckOfCards : DeckOfCards {
                 foreach (Card.Type type in Card.Type.GetValues(typeof(Card.Type))){
                     //BUGFIX BUGFIX; skip duplicate cards in reshuffle -- still troubleshooting
                     //remove card from cardsToSkip if it contains a card w/ suit and number
-                    if (cardsToSkip.Find(c => c.cardNum == type && c.suit == suit) != null) {
-                        cardsToSkip.Remove(cardsToSkip.Find(c => c.cardNum == type && c.suit == suit));
+                    //if (cardsToSkip.Find(c => c.cardNum == type && c.suit == suit) != null) {
+                    //    cardsToSkip.Remove(cardsToSkip.Find(c => c.cardNum == type && c.suit == suit));
                         //Debug.Log("Removed the " + type + " of " + suit);
-                    }
+                    //}
                     //add card if it isn't already in a hand
-                    else {
+                    //else {
                         //add enhanced cards based on number, default normal cards
                         switch ((int)type) {
                             case 2:
-                                // deck.Add(new AJT_SubtractCard(type, suit));
+                                deck.Add(new AJT_NegativeCard(type, suit));
                                 break;
                             case 3:
                                 deck.Add(new AJT_SwapCard(type, suit));
@@ -70,7 +70,7 @@ public class AJT_DeckOfCards : DeckOfCards {
                                 deck.Add(new Card(type, suit));
                                 deckCount = deck.Count;
                                 break;
-                        }                                  
+                      //  }                                  
                     }
                 }
             }
@@ -79,8 +79,7 @@ public class AJT_DeckOfCards : DeckOfCards {
 
 	//returns and removes the next card from the deck
 	public override Card DrawCard() {
-		var nextCard = deck.Next();
-        
+		var nextCard = deck.Next();        
 
         //BUGFIX; remove the card from the shufflebag
         deck.Remove(nextCard);
